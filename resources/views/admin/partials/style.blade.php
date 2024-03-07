@@ -24,3 +24,38 @@
  <link href="{{ url('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+ <style>
+    /* merapikan tabel agar tidak scroll panjang ke samping */
+    .dataTables_wrapper {
+         position: relative;
+     }
+
+     .dataTables_filter {
+         float: right;
+     }
+
+     .dataTables_paginate {
+         float: right;
+     }
+
+     .table {
+         table-layout: fixed;
+         width: 100%;
+     }
+
+     .table th,
+     .table td {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         max-width: 150px;
+         /* Sesuaikan lebar maksimum sesuai kebutuhan */
+     }
+
+     .table td:hover {
+         overflow: visible;
+         white-space: normal;
+         word-wrap: break-word;
+     }
+ </style>

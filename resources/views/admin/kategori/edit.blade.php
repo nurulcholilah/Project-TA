@@ -32,7 +32,7 @@
                                     <label for="kode" class="col-sm-3 col-form-label">Kode</label>
                                     <div class="col-sm-9">
                                         <input type="hidden" name="id_kategori" value="{{ $data->id_kategori }}">
-                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" placeholder="Masukkan judul">
+                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" placeholder="Masukkan kode" value="{{ $data->kode }}">
                                         @error('kode')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}

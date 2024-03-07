@@ -51,7 +51,8 @@ class KategoriController extends Controller
 
         // Validasi jumlah agar tidak melebihi saldo yang ada
         if ($totalKategori + $request->jumlah > $saldo) {
-            return redirect()->route('kategori.create')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+            // return redirect()->route('kategori.create')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+            return redirect()->back()->withInput();
         }
 
         Kategori::create([
@@ -112,7 +113,8 @@ class KategoriController extends Controller
 
         // Validasi jumlah agar tidak melebihi saldo yang ada
         if ($totalKategori + $request->jumlah > $saldo) {
-            return redirect()->route('kategori.edit')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+            // return redirect()->route('kategori.edit')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+            return redirect()->back()->withInput();
         }
 
         // Update data kategori
