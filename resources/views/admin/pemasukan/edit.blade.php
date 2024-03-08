@@ -42,7 +42,8 @@
                                 <div class="row mb-3">
                                     <label for="uraian" class="col-sm-3 col-form-label">Uraian</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="uraian" id="uraian" value="{{ $data->uraian }}">
+                                        <input type="hidden" name="id_kategori" value="{{ $data->id_kategori }}">
+                                        <input type="text" class="form-control @error('uraian') is-invalid @enderror" value="{{ $data->uraian }}" name="uraian" id="uraian" placeholder="Masukkan uraian" value="{{ $data->uraian }}">
                                         @error('uraian')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -51,51 +52,27 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kode" class="col-sm-3 col-form-label">Kode</label>
+                                    <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" placeholder="Masukkan kode">
-                                        @error('kode')
+                                    <input type="text" class="form-control @error('jumlah') is-invalid @enderror" value="{{ $data->jumlah }}" name="jumlah" id="jumlah" placeholder="Masukkan jumlah" value="{{ $data->jumlah }}">
+                                        @error('jumlah')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                                <!-- <div class="row mb-3">
+                                    <label for="total" class="col-sm-3 col-form-label">Total</label>
                                     <div class="col-sm-9">
-                                        <select name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror">
-                                            <option value="">Pilih Keterangan</option>
-                                            <option value="SPJ" {{ $data->keterangan == 'SPJ' ? 'selected' : '' }}>SPJ</option>
-                                            <option value="Tidak SPJ" {{ $data->keterangan == 'Tidak SPJ' ? 'selected' : '' }}>Tidak SPJ</option>
-                                        </select>
-                                        @error('keterangan')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="jum_spj" class="col-sm-3 col-form-label">Jumlah SPJ</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jum_spj" id="jum_spj" value="0">
-                                        @error('jum_spj')
+                                    <input type="text" class="form-control @error('total') is-invalid @enderror" value="{{ $data->total }}" name="total" id="total" placeholder="Masukkan total" value="{{ $data->total }}">
+                                        @error('total')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="jum_tspj" class="col-sm-3 col-form-label">Jumlah Tidak SPJ</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jum_tspj" id="jum_tspj" value="0">
-                                        @error('jum_tspj')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
