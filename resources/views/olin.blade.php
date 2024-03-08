@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
-use App\Models\Saldo;
+use App\Models\Pemasukan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KategoriController extends Controller
+class PemasukanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $data = Kategori::latest()->get();
-        return view('admin.kategori.index', ['data' => $data]);
+        $data = Pemasukan::latest()->get();
+        return view('admin.pemasukan.index', ['data' => $data]);
     }
 
     /**
@@ -27,7 +26,7 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori.create');
+        return view('admin.pemasukan.create');
     }
 
     /**
@@ -39,21 +38,39 @@ class KategoriController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'kode'          => 'required',
-            'keterangan'    => 'required',
-            'saldo'         => 'required',
+            'tanggal' => 'required',
+            'uraian' => 'required',
+            'kode' => 'required',
+            'keterangan' => 'required|in:SPJ,Tidak SPJ',
+            'jum_spj' => 'required_if:keterangan,SPJ',
+            'jum_tspj' => 'required_if:keterangan,Tidak SPJ',
         ]);
-
-       // Ambil nilai saldo dari tabel saldo
-       $saldo = Saldo::first()->saldo;
-
-        Kategori::create([
-            'kode'          => $request->kode,
-            'keterangan'    => $request->keterangan,
-            'saldo'         => $saldo,
+    
+        $jum_spj = $request->keterangan == 'SPJ' ? $request->jum_spj : 0;
+        $jum_tspj = $request->keterangan == 'Tidak SPJ' ? $request->jum_tspj : 0;
+    
+        // Jika keterangan adalah SPJ dan ada data dengan keterangan SPJ
+        if ($request->keterangan == 'SPJ' && Pemasukan::where('keterangan', 'SPJ')->exists()) {
+            $latest_spj = Pemasukan::where('keterangan', 'SPJ')->latest()->first();
+            $jum_spj += $latest_spj->jum_spj;
+        }
+    
+        // Jika keterangan adalah Tidak SPJ dan ada data dengan keterangan Tidak SPJ
+        if ($request->keterangan == 'Tidak SPJ' && Pemasukan::where('keterangan', 'Tidak SPJ')->exists()) {
+            $latest_tspj = Pemasukan::where('keterangan', 'Tidak SPJ')->latest()->first();
+            $jum_tspj += $latest_tspj->jum_tspj;
+        }
+    
+        Pemasukan::create([
+            'tanggal' => $request->tanggal,
+            'uraian' => $request->uraian,
+            'kode' => $request->kode,
+            'keterangan' => $request->keterangan,
+            'jum_spj' => $jum_spj,
+            'jum_tspj' => $jum_tspj,
         ]);
-
-        return redirect()->route('kategori.index')->with('toast_success', 'Data berhasil disimpan');
+    
+        return redirect()->route('pemasukan.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
     /**
@@ -75,12 +92,11 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $data = Kategori::where('id_kategori', $id)->first();
+        $data = Pemasukan::where('id_pemasukan', $id)->first();
         if (!$data) {
-            return redirect()->route('kategori.index')->with('error', 'Data tidak ditemukan');
+            return redirect()->route('pemasukan.index')->with('error', 'Data tidak ditemukan');
         }
-        $saldo = Saldo::where('id_saldo', $id);
-        return view('admin.kategori.edit', compact('data', 'saldo'));
+        return view('admin.pemasukan.edit', compact('data'));
     }
 
     /**
@@ -92,15 +108,40 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Ambil nilai saldo dari tabel saldo
-        $saldo = Saldo::first()->saldo;
-        DB::table('kategoris')->where('id_kategori', $id)->update([
-            'kode'          => $request->kode,
-            'keterangan'    => $request->keterangan,
-            'saldo'         => $saldo,
-        ]);
+        $this->validate($request, [
+        'tanggal' => 'required',
+        'uraian' => 'required',
+        'kode' => 'required',
+        'keterangan' => 'required|in:SPJ,Tidak SPJ',
+        'jum_spj' => 'required_if:keterangan,SPJ',
+        'jum_tspj' => 'required_if:keterangan,Tidak SPJ',
+    ]);
 
-        return redirect()->route('kategori.index')->with('toast_success', 'Data Berhasil Disimpan!');
+    $jum_spj = $request->keterangan == 'SPJ' ? $request->jum_spj : 0;
+    $jum_tspj = $request->keterangan == 'Tidak SPJ' ? $request->jum_tspj : 0;
+
+    // Jika keterangan adalah SPJ dan ada data dengan keterangan SPJ
+    if ($request->keterangan == 'SPJ' && Pemasukan::where('keterangan', 'SPJ')->exists()) {
+        $latest_spj = Pemasukan::where('keterangan', 'SPJ')->where('id_pemasukan', '!=', $id)->latest()->first();
+        $jum_spj += $latest_spj->jum_spj;
+    }
+
+    // Jika keterangan adalah Tidak SPJ dan ada data dengan keterangan Tidak SPJ
+    if ($request->keterangan == 'Tidak SPJ' && Pemasukan::where('keterangan', 'Tidak SPJ')->exists()) {
+        $latest_tspj = Pemasukan::where('keterangan', 'Tidak SPJ')->where('id_pemasukan', '!=', $id)->latest()->first();
+        $jum_tspj += $latest_tspj->jum_tspj;
+    }
+
+    DB::table('pemasukans')->where('id_pemasukan', $id)->update([
+        'tanggal'       => $request->tanggal,
+        'uraian'        => $request->uraian,
+        'kode'          => $request->kode,
+        'keterangan'    => $request->keterangan,
+        'jum_spj'       => $jum_spj,
+        'jum_tspj'      => $jum_tspj,
+    ]);
+
+    return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
     }
 
     /**
@@ -111,7 +152,43 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('kategoris')->where('id_kategori', $id)->delete();
-        return redirect()->route('kategori.index')->with('info', 'Data Berhasil Dihapus!');
+        DB::table('pemasukans')->where('id_pemasukan', $id)->delete();
+        return redirect()->route('pemasukan.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('pemasukans', function (Blueprint $table) {
+            $table->id('id_pemasukan');
+            $table->date('tanggal');
+            $table->string('uraian');
+            $table->string('kode');
+            $table->enum('keterangan', ['SPJ', 'Tidak SPJ'])->nullable();
+            $table->string('jum_spj');
+            $table->string('jum_tspj');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('pemasukans');
+    }
+};

@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Pemasukan</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Pengeluaran</li>
                     </ol>
                 </nav>
             </div>
@@ -18,7 +18,7 @@
         <!--end breadcrumb-->
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('pemasukan.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
+                <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
                     <i class="bx bxs-plus-square"></i>Tambah</a>
             </div>
             <div class="card-body">
@@ -29,8 +29,10 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Jumlah</th>
-                                <th>Total</th>
+                                <th>Kode</th>
+                                <th>Keterangan</th>
+                                <th>Jumlah SPJ</th>
+                                <th>Jumlah Tidak SPJ</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,11 +45,13 @@
                                 <td>{{ $no++ }} </td>
                                 <td>{{ $item->tanggal }} </td>
                                 <td>{{ $item->uraian }}</td>
-                                <td>@currency($item->jumlah)</td>
-                                <td>@currency($item->total)</td>
+                                <td>{{ $item->kode }}</td>
+                                <td>{{ $item->keterangan }}</td>
+                                <td>@currency($item->jum_spj)</td>
+                                <td>@currency($item->jum_tspj)</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pemasukan.destroy', $item->id_pemasukan) }}" method="POST">
-                                        <a href="{{ route('pemasukan.edit', $item->id_pemasukan) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
+                                        <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>
@@ -61,8 +65,10 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Jumlah</th>
-                                <th>Total</th>
+                                <th>Kode</th>
+                                <th>Keterangan</th>
+                                <th>Jumlah SPJ</th>
+                                <th>Jumlah Tidak SPJ</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

@@ -38,36 +38,19 @@ class PemasukanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tanggal' => 'required',
-            'uraian' => 'required',
-            'kode' => 'required',
-            'keterangan' => 'required|in:SPJ,Tidak SPJ',
-            'jum_spj' => 'required_if:keterangan,SPJ',
-            'jum_tspj' => 'required_if:keterangan,Tidak SPJ',
+            'tanggal'   => 'required',
+            'uraian'    => 'required',
+            'jumlah'    => 'required',
         ]);
     
-        $jum_spj = $request->keterangan == 'SPJ' ? $request->jum_spj : 0;
-        $jum_tspj = $request->keterangan == 'Tidak SPJ' ? $request->jum_tspj : 0;
-    
-        // Jika keterangan adalah SPJ dan ada data dengan keterangan SPJ
-        if ($request->keterangan == 'SPJ' && Pemasukan::where('keterangan', 'SPJ')->exists()) {
-            $latest_spj = Pemasukan::where('keterangan', 'SPJ')->latest()->first();
-            $jum_spj += $latest_spj->jum_spj;
-        }
-    
-        // Jika keterangan adalah Tidak SPJ dan ada data dengan keterangan Tidak SPJ
-        if ($request->keterangan == 'Tidak SPJ' && Pemasukan::where('keterangan', 'Tidak SPJ')->exists()) {
-            $latest_tspj = Pemasukan::where('keterangan', 'Tidak SPJ')->latest()->first();
-            $jum_tspj += $latest_tspj->jum_tspj;
-        }
+        // Mengambil total dari semua data yang sudah ada ditambah dengan nilai baru yang dimasukkan
+        $total = Pemasukan::sum('jumlah') + $request->jumlah;
     
         Pemasukan::create([
             'tanggal' => $request->tanggal,
             'uraian' => $request->uraian,
-            'kode' => $request->kode,
-            'keterangan' => $request->keterangan,
-            'jum_spj' => $jum_spj,
-            'jum_tspj' => $jum_tspj,
+            'jumlah' => $request->jumlah,
+            'total' => $total,
         ]);
     
         return redirect()->route('pemasukan.index')->with('toast_success', 'Data berhasil disimpan');
@@ -109,39 +92,22 @@ class PemasukanController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-        'tanggal' => 'required',
-        'uraian' => 'required',
-        'kode' => 'required',
-        'keterangan' => 'required|in:SPJ,Tidak SPJ',
-        'jum_spj' => 'required_if:keterangan,SPJ',
-        'jum_tspj' => 'required_if:keterangan,Tidak SPJ',
-    ]);
-
-    $jum_spj = $request->keterangan == 'SPJ' ? $request->jum_spj : 0;
-    $jum_tspj = $request->keterangan == 'Tidak SPJ' ? $request->jum_tspj : 0;
-
-    // Jika keterangan adalah SPJ dan ada data dengan keterangan SPJ
-    if ($request->keterangan == 'SPJ' && Pemasukan::where('keterangan', 'SPJ')->exists()) {
-        $latest_spj = Pemasukan::where('keterangan', 'SPJ')->where('id_pemasukan', '!=', $id)->latest()->first();
-        $jum_spj += $latest_spj->jum_spj;
-    }
-
-    // Jika keterangan adalah Tidak SPJ dan ada data dengan keterangan Tidak SPJ
-    if ($request->keterangan == 'Tidak SPJ' && Pemasukan::where('keterangan', 'Tidak SPJ')->exists()) {
-        $latest_tspj = Pemasukan::where('keterangan', 'Tidak SPJ')->where('id_pemasukan', '!=', $id)->latest()->first();
-        $jum_tspj += $latest_tspj->jum_tspj;
-    }
-
-    DB::table('pemasukans')->where('id_pemasukan', $id)->update([
-        'tanggal'       => $request->tanggal,
-        'uraian'        => $request->uraian,
-        'kode'          => $request->kode,
-        'keterangan'    => $request->keterangan,
-        'jum_spj'       => $jum_spj,
-        'jum_tspj'      => $jum_tspj,
-    ]);
-
-    return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
+            'tanggal'   => 'required',
+            'uraian'    => 'required',
+            'jumlah'    => 'required',
+        ]);
+    
+        // Mengambil total dari semua data yang sudah ada dikurangi dengan nilai yang diubah ditambah dengan nilai baru yang dimasukkan
+        $total = (Pemasukan::sum('jumlah') - Pemasukan::find($id)->jumlah) + $request->jumlah;
+    
+        DB::table('pemasukans')->where('id_pemasukan', $id)->update([
+            'tanggal'       => $request->tanggal,
+            'uraian'        => $request->uraian,
+            'jumlah'        => $request->jumlah,
+            'total'         => $total,
+        ]);
+    
+        return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
     }
 
     /**

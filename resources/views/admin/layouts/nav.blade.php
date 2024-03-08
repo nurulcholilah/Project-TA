@@ -49,8 +49,8 @@
                 </li>
                 <li> <a href="{{ url('pemasukan') }}"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a>
                 </li>
-                <!-- <li> <a href="{{ url('pengeluaran') }}"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a>
-                </li> -->
+                <li> <a href="{{ url('pengeluaran') }}"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a>
+                </li>
                 <!-- <li> <a href="{{ url('bon') }}"><i class="bx bx-right-arrow-alt"></i>Bon</a>
                 </li> -->
             </ul>
