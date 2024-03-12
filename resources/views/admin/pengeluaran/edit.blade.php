@@ -51,10 +51,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kode" class="col-sm-3 col-form-label">Kode</label>
+                                    <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" placeholder="Masukkan kode">
-                                        @error('kode')
+                                        <input type="text" class="form-control @error('jumlah') is-invalid @enderror" value="{{ $data->jumlah }}" name="jumlah" id="jumlah" placeholder="Masukkan jumlah">
+                                        @error('jumlah')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -62,23 +62,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                                    <label for="spj" class="col-sm-3 col-form-label">Jumlah SPJ</label>
                                     <div class="col-sm-9">
-                                        <select name="keterangan" id="keterangan" class="form-control @error('keterangan') is-invalid @enderror">
-                                            <option value="">Pilih Keterangan</option>
-                                            <option value="SPJ" {{ $data->keterangan == 'SPJ' ? 'selected' : '' }}>SPJ</option>
-                                            <option value="Tidak SPJ" {{ $data->keterangan == 'Tidak SPJ' ? 'selected' : '' }}>Tidak SPJ</option>
-                                        </select>
-                                        @error('keterangan')
-                                        <div class="alert alert-danger mt-2">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="jum_spj" class="col-sm-3 col-form-label">Jumlah SPJ</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jum_spj" id="jum_spj" value="0">
-                                        @error('jum_spj')
+                                        <input type="text" class="form-control @error('spj') is-invalid @enderror" name="spj" id="spj" value="{{ $data->spj }}">
+                                        @error('spj')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -86,10 +73,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="jum_tspj" class="col-sm-3 col-form-label">Jumlah Tidak SPJ</label>
+                                    <label for="tdspj" class="col-sm-3 col-form-label">Jumlah Tidak SPJ</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jum_tspj" id="jum_tspj" value="0">
-                                        @error('jum_tspj')
+                                        <input type="text" class="form-control @error('tdspj') is-invalid @enderror" name="tdspj" id="tdspj" value="{{ $data->tdspj }}">
+                                        @error('tdspj')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>

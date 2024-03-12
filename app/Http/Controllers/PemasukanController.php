@@ -118,7 +118,23 @@ class PemasukanController extends Controller
      */
     public function destroy($id)
     {
+        // Mengambil jumlah yang akan dihapus
+        $jumlahToDelete = Pemasukan::find($id)->jumlah;
+
+        // Mengambil total sekarang
+        $total = Pemasukan::sum('jumlah');
+
+        // Menghitung total baru setelah mengurangi jumlah yang akan dihapus
+        $totalAfterDelete = $total - $jumlahToDelete;
+
+        // Mengupdate total di database
+        DB::table('pemasukans')->update([
+            'total' => $totalAfterDelete,
+        ]);
+
+        // Menghapus data
         DB::table('pemasukans')->where('id_pemasukan', $id)->delete();
+
         return redirect()->route('pemasukan.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }

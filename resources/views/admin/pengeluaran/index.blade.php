@@ -29,10 +29,10 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Kode</th>
-                                <th>Keterangan</th>
-                                <th>Jumlah SPJ</th>
-                                <th>Jumlah Tidak SPJ</th>
+                                <th>Jumlah</th>
+                                <th>SPJ</th>
+                                <th>Tidak SPJ</th>
+                                <th>Total</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -45,12 +45,12 @@
                                 <td>{{ $no++ }} </td>
                                 <td>{{ $item->tanggal }} </td>
                                 <td>{{ $item->uraian }}</td>
-                                <td>{{ $item->kode }}</td>
-                                <td>{{ $item->keterangan }}</td>
-                                <td>@currency($item->jum_spj)</td>
-                                <td>@currency($item->jum_tspj)</td>
+                                <td>@currency($item->jumlah)</td>
+                                <td>@currency($item->spj)</td>
+                                <td>@currency($item->tdspj)</td>
+                                <td>@currency($item->total)</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
+                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
                                         <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
@@ -65,10 +65,10 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Kode</th>
-                                <th>Keterangan</th>
-                                <th>Jumlah SPJ</th>
-                                <th>Jumlah Tidak SPJ</th>
+                                <th>Jumlah</th>
+                                <th>SPJ</th>
+                                <th>Tidak SPJ</th>
+                                <th>Total</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
