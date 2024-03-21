@@ -1,4 +1,4 @@
-@extends("admin.layouts.app")
+@extends("layouts.apps")
 @section("wrapper")
 <div class="page-wrapper">
     <div class="page-content">
@@ -17,10 +17,12 @@
         </div>
         <!--end breadcrumb-->
         <div class="card">
+            @if(auth()->user()->hasRole('admin'))
             <div class="card-header">
                 <a href="{{ route('kategori.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
                     <i class="bx bxs-plus-square"></i>Tambah</a>
             </div>
+            @endif
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-hover table-bordered" style="width:100%">
@@ -43,6 +45,7 @@
                                 <td>{{ $item->kode }} </td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td>@currency($item->jumlah)</td>
+                                @if(auth()->user()->hasRole('admin'))
                                 <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kategori.destroy', $item->id_kategori) }}" method="POST">
                                         <a href="{{ route('kategori.edit', $item->id_kategori) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
@@ -51,6 +54,7 @@
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>
                                     </form>
                                 </td>
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>
