@@ -11,58 +11,58 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
-        <!-- <li>
-            <a href="{{ url('dashboard') }}">
+        <li>
+            <a href="/dashboard">
                 <div class="parent-icon"><i class="bx bx-home"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        <li>
+
+        <!-- <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-line-chart'></i>
                 </div>
                 <div class="menu-title">Anggaran</div>
             </a>
             <ul>
-                <li> <a href="{{ url('anggaran') }}"><i class="bx bx-right-arrow-alt"></i>Data Anggaran</a>
+                <li> <a href="/anggaran"><i class="bx bx-right-arrow-alt"></i>Data Anggaran</a>
                 </li>
-                <li> <a href="{{ url('pengajuan') }}"><i class="bx bx-right-arrow-alt"></i>Pengajuan</a>
+                <li> <a href="/pengajuan"><i class="bx bx-right-arrow-alt"></i>Pengajuan</a>
                 </li>
             </ul>
         </li> -->
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
         <li>
-            <a href="{{ url('kategori') }}">
-                <div class="parent-icon"><i class='bx bx-menu'></i>
-                </div>
+            <a href="/kategori">
+                <div class="parent-icon"><i class='bx bx-menu'></i></div>
                 <div class="menu-title">Kategori</div>
             </a>
         </li>
+        @endif
+
+        @if(auth()->user()->hasRole('admin'))
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-dollar-circle'></i>
-                </div>
+                <div class="parent-icon"><i class='bx bx-dollar-circle'></i></div>
                 <div class="menu-title">Transaksi</div>
             </a>
             <ul>
-                <li> <a href="{{ url('saldo') }}"><i class="bx bx-right-arrow-alt"></i>Saldo</a>
-                </li>
-                <li> <a href="{{ url('pemasukan') }}"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a>
-                </li>
-                <li> <a href="{{ url('pengeluaran') }}"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a>
-                </li>
-                <!-- <li> <a href="{{ url('bon') }}"><i class="bx bx-right-arrow-alt"></i>Bon</a>
-                </li> -->
+                <li><a href="/saldo"><i class="bx bx-right-arrow-alt"></i>Saldo</a></li>
+                <li><a href="/pemasukan"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a></li>
+                <li><a href="/pengeluaran"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a></li>
             </ul>
-        <!-- </li>
-            <a href="{{ url('pengingat') }}">
+        </li>
+        @endif
+        <!-- <li>
+            <a href="/pengingat">
                 <div class="parent-icon"><i class='bx bx-bell'></i>
                 </div>
                 <div class="menu-title">Pengingat</div>
             </a>
-        </li>
-        <li>
-            <a href="{{ url('laporan') }}">
+        </li> -->
+        <!-- <li>
+            <a href="/laporan">
                 <div class="parent-icon"><i class='bx bx-folder'></i>
                 </div>
                 <div class="menu-title">Laporan</div>

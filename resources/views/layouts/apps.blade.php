@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @include("user.partials.style")
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include("partials.style")
     <title>ADMIFIN</title>
 </head>
 
@@ -13,11 +14,11 @@
     <!--wrapper-->
     <div class="wrapper">
         <!--navigation-->
-        @include("user.layouts.nav")
+        @include("layouts.nav")
         <!--end navigation-->
 
         <!--start header -->
-        @include("user.layouts.header")
+        @include("layouts.header")
         <!--end header -->
 
         <!--start page wrapper -->
@@ -126,8 +127,8 @@
         </div>
     </div>
     <!--end switcher-->
-    @include("user.partials.script")
-    @include("user.layouts.theme-control")
+    @include("partials.script")
+    @include("layouts.theme-control")
 </body>
 
 </html>
