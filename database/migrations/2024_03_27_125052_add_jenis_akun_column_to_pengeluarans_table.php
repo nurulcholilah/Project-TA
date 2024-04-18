@@ -13,14 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pengeluarans', function (Blueprint $table) {
-            $table->id('id_pengeluaran');
-            $table->date('tanggal');
-            $table->string('uraian');
-            $table->string('jumlah');
-            $table->string('spj');
-            $table->string('tdspj');
-            $table->timestamps();
+        Schema::table('pengeluarans', function (Blueprint $table) {
+            $table->string('jenis_akun')->after('kode_akun');
         });
     }
 
@@ -31,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pengeluarans');
+        Schema::table('pengeluarans', function (Blueprint $table) {
+            $table->dropColumn('jenis_akun');
+        });
     }
 };

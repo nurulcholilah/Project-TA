@@ -28,10 +28,59 @@
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
+                                    <label for="file" class="col-sm-3 col-form-label">Nota</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control @error('file') is-invalid @enderror" name="file" id="file" placeholder="Masukkan file">
+                                        @error('file')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="tanggal" placeholder="Masukkan tanggal">
+                                        <input type="date" class="result form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="tanggal" placeholder="Masukkan tanggal">
                                         @error('tanggal')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="kode_akun" class="col-sm-3 col-form-label">Kode Akun</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('kode_akun') is-invalid @enderror" name="kode_akun" id="kode_akun" placeholder="Masukkan kode akun" value="{{ old('kode_akun') }}">
+                                        @error('kode_akun')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="jenis_akun" class="col-sm-3 col-form-label">Jenis Akun</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('jenis_akun') is-invalid @enderror" name="jenis_akun" id="jenis_akun" placeholder="Masukkan jenis akun" value="{{ old('jenis_akun') }}">
+                                        @error('jenis_akun')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Kategori</label>
+                                    <div class="col-sm-9">
+                                        <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                                            <option value="">- Pilih -</option>
+                                            @foreach($kategori as $item)
+                                            <option value="{{ $item->id_kategori }}">{{ $item->keterangan }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kategori_id')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -43,6 +92,17 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control @error('uraian') is-invalid @enderror" name="uraian" id="uraian" placeholder="Masukkan uraian" value="{{ old('uraian') }}">
                                         @error('uraian')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="penerima" class="col-sm-3 col-form-label">Penerima</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('penerima') is-invalid @enderror" name="penerima" id="penerima" placeholder="Masukkan penerima" value="{{ old('penerima') }}">
+                                        @error('penerima')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>

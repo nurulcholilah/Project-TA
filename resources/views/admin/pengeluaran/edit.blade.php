@@ -29,6 +29,18 @@
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
+                                    <label for="file" class="col-sm-3 col-form-label">Nota</label>
+                                    <div class="col-sm-9">
+                                        <img src="{{ url('assets/images/file/' . $data->file) }}" alt="{{ $data->file }}" height="150" class="mb-3">
+                                        <input type="file" class="form-control" name="file" id="file" value="{{ $data->file }}">
+                                        @error('file')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
                                         <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ $data->tanggal }}">
@@ -40,10 +52,60 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="kode_akun" class="col-sm-3 col-form-label">Kode Akun</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="kode_akun" id="kode_akun" value="{{ $data->kode_akun }}">
+                                        @error('kode_akun')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="jenis_akun" class="col-sm-3 col-form-label">Jenis Akun</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="jenis_akun" id="jenis_akun" value="{{ $data->jenis_akun }}">
+                                        @error('jenis_akun')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Kategori</label>
+                                    <div class="col-sm-9">
+                                        <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                                            <option value="">- Pilih -</option>
+                                            @forelse($kategori as $item)
+                                            <option value="{{ $item->id_kategori }}" {{ $data->kategori_id == $item->id_kategori ? 'selected' : '' }}>{{ $item->keterangan }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                        @error('kategori_id')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="uraian" class="col-sm-3 col-form-label">Uraian</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="uraian" id="uraian" value="{{ $data->uraian }}">
+                                        <input type="text" class="form-control @error('uraian') is-invalid @enderror" name="uraian" id="uraian" value="{{ $data->uraian }}">
                                         @error('uraian')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="penerima" class="col-sm-3 col-form-label">Penerima</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('penerima') is-invalid @enderror" name="penerima" id="penerima" value="{{ $data->penerima }}">
+                                        @error('penerima')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -53,7 +115,7 @@
                                 <div class="row mb-3">
                                     <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control @error('jumlah') is-invalid @enderror" value="{{ $data->jumlah }}" name="jumlah" id="jumlah" placeholder="Masukkan jumlah">
+                                        <input type="text" class="form-control @error('jumlah') is-invalid @enderror" value="{{ $data->jumlah }}" name="jumlah" id="jumlah">
                                         @error('jumlah')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}

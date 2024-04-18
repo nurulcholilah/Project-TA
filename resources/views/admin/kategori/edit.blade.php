@@ -32,7 +32,7 @@
                                     <label for="kode" class="col-sm-3 col-form-label">Kode</label>
                                     <div class="col-sm-9">
                                         <input type="hidden" name="id_kategori" value="{{ $data->id_kategori }}">
-                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" placeholder="Masukkan kode" value="{{ $data->kode }}">
+                                        <input type="text" class="form-control @error('kode') is-invalid @enderror" value="{{ $data->kode }}" name="kode" id="kode" value="{{ $data->kode }}">
                                         @error('kode')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -54,7 +54,7 @@
                                 <div class="row mb-3">
                                     <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jumlah" id="jumlah_input" value="{{ $data->jumlah }}">
+                                        <input type="text" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah" id="jumlah_input" value="{{ $data->jumlah }}">
                                         @error('jumlah')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}

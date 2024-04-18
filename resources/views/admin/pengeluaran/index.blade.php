@@ -28,11 +28,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Uraian</th>
+                                <th>Kategori</th>
                                 <th>Jumlah</th>
-                                <th>SPJ</th>
-                                <th>Tidak SPJ</th>
-                                <th>Total</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,14 +40,12 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $no++ }} </td>
-                                <td>{{ $item->tanggal }} </td>
-                                <td>{{ $item->uraian }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
+                                <td>{{ $item->kategori }}</td>
                                 <td>@currency($item->jumlah)</td>
-                                <td>@currency($item->spj)</td>
-                                <td>@currency($item->tdspj)</td>
-                                <td>@currency($item->total)</td>
                                 <td class="text-center">
-                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
+                                        <a href="{{ route('pengeluaran.show', $item->id_pengeluaran) }}" class="btn btn-sm btn-info"><i class="bx bx-show"></i></a>
                                         <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
@@ -64,11 +59,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Uraian</th>
+                                <th>Kategori</th>
                                 <th>Jumlah</th>
-                                <th>SPJ</th>
-                                <th>Tidak SPJ</th>
-                                <th>Total</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

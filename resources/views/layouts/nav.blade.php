@@ -18,8 +18,9 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-
-        <!-- <li>
+        
+        <!-- @role('admin|pegawai')
+        <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-line-chart'></i>
                 </div>
@@ -31,7 +32,9 @@
                 <li> <a href="/pengajuan"><i class="bx bx-right-arrow-alt"></i>Pengajuan</a>
                 </li>
             </ul>
-        </li> -->
+        </li>
+        @endrole -->
+
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
         <li>
             <a href="/kategori">

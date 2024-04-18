@@ -12,4 +12,9 @@ class Pengeluaran extends Model
     protected $primaryKey = 'id_pengeluaran';
     protected $table = 'pengeluarans';
     protected $guarded = [];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
 }

@@ -43,14 +43,13 @@ class PemasukanController extends Controller
             'jumlah'    => 'required',
         ]);
     
-        // Mengambil total dari semua data yang sudah ada ditambah dengan nilai baru yang dimasukkan
-        $total = Pemasukan::sum('jumlah') + $request->jumlah;
+        // $total = Pemasukan::sum('jumlah') + $request->jumlah;
     
         Pemasukan::create([
             'tanggal' => $request->tanggal,
             'uraian' => $request->uraian,
             'jumlah' => $request->jumlah,
-            'total' => $total,
+            // 'total' => $total,
         ]);
     
         return redirect()->route('pemasukan.index')->with('toast_success', 'Data berhasil disimpan');
@@ -97,14 +96,15 @@ class PemasukanController extends Controller
             'jumlah'    => 'required',
         ]);
     
-        // Mengambil total dari semua data yang sudah ada dikurangi dengan nilai yang diubah ditambah dengan nilai baru yang dimasukkan
-        $total = (Pemasukan::sum('jumlah') - Pemasukan::find($id)->jumlah) + $request->jumlah;
+        // $total = (Pemasukan::sum('jumlah') - Pemasukan::find($id)->jumlah) + $request->jumlah;
+
+        $pemasukan = Pemasukan::find($id);
     
         DB::table('pemasukans')->where('id_pemasukan', $id)->update([
             'tanggal'       => $request->tanggal,
             'uraian'        => $request->uraian,
             'jumlah'        => $request->jumlah,
-            'total'         => $total,
+            // 'total'         => $total,
         ]);
     
         return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
@@ -118,23 +118,7 @@ class PemasukanController extends Controller
      */
     public function destroy($id)
     {
-        // Mengambil jumlah yang akan dihapus
-        $jumlahToDelete = Pemasukan::find($id)->jumlah;
-
-        // Mengambil total sekarang
-        $total = Pemasukan::sum('jumlah');
-
-        // Menghitung total baru setelah mengurangi jumlah yang akan dihapus
-        $totalAfterDelete = $total - $jumlahToDelete;
-
-        // Mengupdate total di database
-        DB::table('pemasukans')->update([
-            'total' => $totalAfterDelete,
-        ]);
-
-        // Menghapus data
         DB::table('pemasukans')->where('id_pemasukan', $id)->delete();
-
         return redirect()->route('pemasukan.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }

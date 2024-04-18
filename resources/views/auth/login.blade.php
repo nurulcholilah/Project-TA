@@ -37,11 +37,16 @@
                                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                         </div>
 
-                                        <div class="mb-3">
-                                            <x-input-label for="password" :value="__('Password')" />
-                                            <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
-                                            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                                        </div>
+                                        <div class="mb-3" id="show_hide_password">
+    <x-input-label for="password" :value="__('Password')" />
+    <div class="input-group">
+        <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
+        <a class="input-group-text bg-transparent" id="toggle-password-visibility">
+            <i class='bx bx-hide'></i>
+        </a>
+    </div>
+    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+</div>
 
                                         <div class="mb-3 form-check">
                                             <input id="remember_me" type="checkbox" class="form-check-input" name="remember">
