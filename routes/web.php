@@ -35,6 +35,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::resource('kategori', KategoriController::class)->middleware(['auth', 'verified', 'role:admin']);
     Route::resource('saldo', SaldoController::class)->middleware(['auth', 'verified', 'role:admin']);
     Route::resource('pengeluaran', PengeluaranController::class)->middleware(['auth', 'verified', 'role:admin']);
+    Route::get('pengeluaran/{id_pengeluaran}', 'PengeluaranController@show')->name('pengeluaran.show')->middleware(['auth', 'verified', 'role:admin']);
 });
 
 Route::middleware(['auth', 'verified', 'role:pegawai'])->group(function () {

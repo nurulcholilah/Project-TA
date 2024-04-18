@@ -45,7 +45,7 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $no++ }} </td>
-                                <td>{{ $item->tanggal }} </td>
+                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
                                 <td>@currency($item->saldo) </td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td class="text-center">

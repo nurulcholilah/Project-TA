@@ -32,7 +32,9 @@
                                 <th>Kode</th>
                                 <th>Keterangan</th>
                                 <th>Jumlah</th>
+                                @if(auth()->user()->hasRole('admin'))
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         @php
@@ -64,7 +66,9 @@
                                 <th>Kode</th>
                                 <th>Keterangan</th>
                                 <th>Jumlah</th>
+                                @if(auth()->user()->hasRole('admin'))
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                         </tfoot>
                     </table>
