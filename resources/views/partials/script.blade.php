@@ -10,14 +10,16 @@
  <!-- datatable -->
  <script src="{{ url('assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
  <script src="{{ url('assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
- 
+ <script src="{{ url('assets/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
+ <script src="{{ url('assets/js/widgets.js')}}"></script>
+
  <!-- script untuk pencarian -->
  <script>
      $(document).ready(function() {
          $('#example').DataTable();
      });
  </script>
- 
+
  <script>
      $(document).ready(function() {
          var table = $('#example2').DataTable({

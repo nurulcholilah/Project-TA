@@ -18,7 +18,9 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
-        
+
+        <li class="menu-label">Master Data</li>
+
         <!-- @role('admin|pegawai')
         <li>
             <a href="javascript:;" class="has-arrow">
@@ -35,6 +37,15 @@
         </li>
         @endrole -->
 
+        @role('admin')
+        <li>
+            <a href="/saldo">
+                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="menu-title">Saldo</div>
+            </a>
+        </li>
+        @endrole
+
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
         <li>
             <a href="/kategori">
@@ -45,13 +56,13 @@
         @endif
 
         @if(auth()->user()->hasRole('admin'))
+        <li class="menu-label">Pencatatan</li>
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-dollar-circle'></i></div>
                 <div class="menu-title">Transaksi</div>
             </a>
             <ul>
-                <li><a href="/saldo"><i class="bx bx-right-arrow-alt"></i>Saldo</a></li>
                 <li><a href="/pemasukan"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a></li>
                 <li><a href="/pengeluaran"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a></li>
             </ul>
