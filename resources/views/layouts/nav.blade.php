@@ -91,6 +91,16 @@
                 <div class="menu-title">Laporan</div>
             </a>
         </li> -->
+
+        @role('admin')
+        <li class="menu-label">Pengaturan</li>
+        <li>
+            <a href="/user">
+                <div class="parent-icon"><i class='bx bx-user'></i></div>
+                <div class="menu-title">User</div>
+            </a>
+        </li>
+        @endrole
     </ul>
     <!--end navigation-->
 </div>
