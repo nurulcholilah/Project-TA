@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Pengeluaran</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Jenis Akun</li>
                     </ol>
                 </nav>
             </div>
@@ -18,7 +18,7 @@
         <!--end breadcrumb-->
         <div class="card">
             <div class="card-header">
-                <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
+                <a href="{{ route('jenisakun.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
                     <i class="bx bxs-plus-square"></i>Tambah</a>
             </div>
             <div class="card-body">
@@ -27,9 +27,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Kategori</th>
-                                <th>Jumlah</th>
+                                <th>Kode</th>
+                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -40,13 +39,11 @@
                             @foreach ($data as $item)
                             <tr>
                                 <td>{{ $no++ }} </td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                                <td>{{ $item->kategori->keterangan }}</td>
-                                <td>@currency($item->jumlah)</td>
+                                <td>{{ $item->kode }} </td>
+                                <td>{{ $item->keterangan }}</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
-                                        <a href="{{ route('pengeluaran.show', $item->id_pengeluaran) }}" class="btn btn-sm btn-info"><i class="bx bx-show"></i></a>
-                                        <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('jenisakun.destroy', $item->id_jenis_akun) }}" method="POST">
+                                        <a href="{{ route('jenisakun.edit', $item->id_jenis_akun) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>
@@ -58,9 +55,8 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Kategori</th>
-                                <th>Jumlah</th>
+                                <th>Kode</th>
+                                <th>Keterangan</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>

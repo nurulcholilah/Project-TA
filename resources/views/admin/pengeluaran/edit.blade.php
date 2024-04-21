@@ -52,10 +52,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kode_akun" class="col-sm-3 col-form-label">Kode Akun</label>
+                                    <label for="jenis_akun_id" class="col-sm-3 col-form-label">Jenis Akun</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="kode_akun" id="kode_akun" value="{{ $data->kode_akun }}">
-                                        @error('kode_akun')
+                                        <select name="jenis_akun_id" id="jenis_akun_id" class="form-control @error('jenis_akun_id') is-invalid @enderror">
+                                            <option value="">- Pilih -</option>
+                                            @forelse($jenisAkun as $item)
+                                            <option value="{{ $item->id_jenis_akun }}" {{ $data->jenis_akun_id == $item->id_jenis_akun ? 'selected' : '' }}>{{ $item->keterangan }}</option>
+                                            @empty
+                                            @endforelse
+                                        </select>
+                                        @error('jenis_akun_id')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -63,10 +69,10 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="jenis_akun" class="col-sm-3 col-form-label">Jenis Akun</label>
+                                    <label for="kode_akun" class="col-sm-3 col-form-label">Kode Akun</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="jenis_akun" id="jenis_akun" value="{{ $data->jenis_akun }}">
-                                        @error('jenis_akun')
+                                        <input type="text" class="form-control" name="kode_akun" id="kode_akun" value="{{ $data->kode_akun }}">
+                                        @error('kode_akun')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>

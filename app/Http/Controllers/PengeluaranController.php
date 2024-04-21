@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JenisAkun;
 use App\Models\Kategori;
 use App\Models\Pengeluaran;
 use Carbon\Carbon;
@@ -17,11 +18,7 @@ class PengeluaranController extends Controller
      */
     public function index()
     {
-        $data = Pengeluaran::leftJoin('kategoris', 'pengeluarans.kategori_id', '=', 'kategoris.id_kategori')
-            ->select('pengeluarans.*', 'kategoris.keterangan AS kategori')
-            ->orderBy('pengeluarans.id_pengeluaran', 'desc')
-            ->get();
-
+        $data = Pengeluaran::latest()->get();
         return view('admin.pengeluaran.index', compact('data'));
     }
 
@@ -34,7 +31,8 @@ class PengeluaranController extends Controller
     {
         $today = Carbon::today()->format('d/m/Y');
         $kategori = Kategori::all();
-        return view('admin.pengeluaran.create', compact('today', 'kategori'));
+        $jenisAkun = JenisAkun::all();
+        return view('admin.pengeluaran.create', compact('today', 'kategori', 'jenisAkun'));
     }
 
     /**
@@ -48,8 +46,8 @@ class PengeluaranController extends Controller
         $this->validate($request, [
             'file'        => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,pdf|max:2048',
             'tanggal'     => 'required',
+            'jenis_akun_id'  => 'required',
             'kode_akun'   => 'required',
-            'jenis_akun'  => 'required',
             'kategori_id' => 'required',
             'uraian'      => 'required',
             'penerima'    => 'required',
@@ -72,8 +70,8 @@ class PengeluaranController extends Controller
         Pengeluaran::create([
             'file'        => $myfile,
             'tanggal'     => $request->tanggal,
+            'jenis_akun_id'  => $request->jenis_akun_id,
             'kode_akun'   => $request->kode_akun,
-            'jenis_akun'  => $request->jenis_akun,
             'kategori_id' => $request->kategori_id,
             'uraian'      => $request->uraian,
             'penerima'    => $request->penerima,
@@ -93,12 +91,10 @@ class PengeluaranController extends Controller
      */
     public function show($id)
     {
-        $data = Pengeluaran::leftJoin('kategoris', 'pengeluarans.kategori_id', '=', 'kategoris.id_kategori')
-            ->select('pengeluarans.*', 'kategoris.keterangan AS kategori')
-            ->where('pengeluarans.id_pengeluaran', $id)
-            ->firstOrFail();
+        $data = Pengeluaran::findOrFail($id);
         $kategori = Kategori::all();
-        return view('admin.pengeluaran.show', compact('data', 'kategori'));
+        $jenisAkun = JenisAkun::all();
+        return view('admin.pengeluaran.show', compact('data', 'kategori', 'jenisAkun'));
     }
 
     /**
@@ -109,15 +105,10 @@ class PengeluaranController extends Controller
      */
     public function edit($id)
     {
-        $data = Pengeluaran::findOrFail($id);
+        $jenisAkun = JenisAkun::all();
         $kategori = Kategori::all();
-        return view('admin.pengeluaran.edit', compact('data', 'kategori'));
-
-        // $data = Pengeluaran::where('id_pengeluaran', $id)->first();
-        // if (!$data) {
-        //     return redirect()->route('pengeluaran.index')->with('error', 'Data tidak ditemukan');
-        // }
-        // return view('admin.pengeluaran.edit', compact('data'));
+        $data = Pengeluaran::find($id);
+        return view('admin.pengeluaran.edit', compact('data', 'kategori', 'jenisAkun'));
     }
 
     /**
@@ -130,10 +121,10 @@ class PengeluaranController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'file'        => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,pdf|max:2048',
+            'file'        => 'file|mimes:jpeg,png,jpg,gif,svg,webp,pdf|max:2048',
             'tanggal'     => 'required',
+            'jenis_akun_id'  => 'required',
             'kode_akun'   => 'required',
-            'jenis_akun'  => 'required',
             'kategori_id' => 'required',
             'uraian'      => 'required',
             'penerima'    => 'required',
@@ -167,8 +158,8 @@ class PengeluaranController extends Controller
         }
 
         $pengeluaran->tanggal = $request->tanggal;
+        $pengeluaran->jenis_akun_id = $request->jenis_akun_id;
         $pengeluaran->kode_akun = $request->kode_akun;
-        $pengeluaran->jenis_akun = $request->jenis_akun;
         $pengeluaran->kategori_id = $request->kategori_id;
         $pengeluaran->uraian = $request->uraian;
         $pengeluaran->penerima = $request->penerima;
