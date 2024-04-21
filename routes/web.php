@@ -7,6 +7,7 @@ use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,7 @@ Route::middleware(['auth', 'verified', ])->group(function () {
     Route::resource('pengeluaran', PengeluaranController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::get('pengeluaran/{id_pengeluaran}', 'PengeluaranController@show')->name('pengeluaran.show')->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('jenisakun', JenisAkunController::class)->middleware(['auth', 'verified', 'role:admin' ]);
+    Route::resource('user', UserController::class)->middleware(['auth', 'verified', 'role:admin' ]);
 });
 
 
