@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JenisAkunController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified', 'role:admin|pegawai' ])
+    ->middleware(['auth', 'verified', 'role:admin|pegawai'])
     ->name('dashboard');
 
 Route::middleware(['auth', 'verified', ])->group(function () {
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'verified', ])->group(function () {
     Route::resource('saldo', SaldoController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('pengeluaran', PengeluaranController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::get('pengeluaran/{id_pengeluaran}', 'PengeluaranController@show')->name('pengeluaran.show')->middleware(['auth', 'verified', 'role:admin' ]);
+    Route::resource('jenisakun', JenisAkunController::class)->middleware(['auth', 'verified', 'role:admin' ]);
 });
 
 

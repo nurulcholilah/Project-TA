@@ -15,6 +15,16 @@ class Pengeluaran extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(Kategori::class, 'id_kategori');
+        return $this->belongsTo(Kategori::class, 'kategori_id', 'id_kategori');
     }
+
+    public function jenisAkun()
+    {
+        return $this->belongsTo(JenisAkun::class, 'jenis_akun_id', 'id_jenis_akun');
+    }
+
+
+
+    
+
 }

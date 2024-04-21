@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pengeluarans', function (Blueprint $table) {
-            $table->string('jenis_akun')->after('kode_akun');
+            $table->unsignedBigInteger('jenis_akun_id')->nullable()->after('tanggal');
+            $table->foreign('jenis_akun_id')->references('id_jenis_akun')->on('jenis_akuns');
         });
     }
 
@@ -26,7 +27,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('pengeluarans', function (Blueprint $table) {
-            $table->dropColumn('jenis_akun');
+            $table->dropForeign(['jenis_akun_id']);
+            $table->dropColumn('jenis_akun_id');
         });
     }
 };

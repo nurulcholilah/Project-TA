@@ -55,6 +55,15 @@
         </li>
         @endif
 
+        @role('admin')
+        <li>
+            <a href="/jenisakun">
+                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="menu-title">Jenis Akun</div>
+            </a>
+        </li>
+        @endrole
+
         @if(auth()->user()->hasRole('admin'))
         <li class="menu-label">Pencatatan</li>
         <li>
