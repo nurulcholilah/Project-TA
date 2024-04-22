@@ -45,8 +45,14 @@
             </a>
         </li>
         @endrole
-
+        
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
+        <li>
+            <a href="/anggaran">
+                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="menu-title">Anggaran</div>
+            </a>
+        </li>
         <li>
             <a href="/kategori">
                 <div class="parent-icon"><i class='bx bx-menu'></i></div>

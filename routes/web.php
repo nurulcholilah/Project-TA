@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisAkunController;
 use App\Http\Controllers\KategoriController;
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'verified', ])->group(function () {
     Route::get('pengeluaran/{id_pengeluaran}', 'PengeluaranController@show')->name('pengeluaran.show')->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('jenisakun', JenisAkunController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('user', UserController::class)->middleware(['auth', 'verified', 'role:admin' ]);
+    Route::resource('anggaran', AnggaranController::class)->middleware(['auth', 'verified', 'role:admin|pegawai' ]);
 });
 
 
