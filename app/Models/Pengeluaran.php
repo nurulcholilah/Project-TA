@@ -22,9 +22,4 @@ class Pengeluaran extends Model
     {
         return $this->belongsTo(JenisAkun::class, 'jenis_akun_id', 'id_jenis_akun');
     }
-
-
-
-    
-
 }
