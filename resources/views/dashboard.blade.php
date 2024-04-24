@@ -84,7 +84,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0">Pengeluaran Tahun ini</p>
-                                <h5 class="mb-0">@currency($pemasukanTahunIni)</h5>
+                                <h5 class="mb-0">@currency($pengeluaranTahunIni)</h5>
                             </div>
                             <div class="ms-auto"> <i class='bx bx-bulb font-30'></i>
                             </div>
@@ -99,7 +99,7 @@
                         <div class="d-flex align-items-center">
                             <div>
                                 <p class="mb-0">Pemasukan Tahun ini</p>
-                                <h5 class="mb-0">@currency($pengeluaranTahunIni)</h5>
+                                <h5 class="mb-0">@currency($pemasukanTahunIni)</h5>
                             </div>
                             <div class="ms-auto"> <i class='bx bx-bulb font-30'></i>
                             </div>

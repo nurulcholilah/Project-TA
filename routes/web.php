@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnggaranController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisAkunController;
+use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengeluaranController;
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified', ])->group(function () {
     Route::resource('jenisakun', JenisAkunController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('user', UserController::class)->middleware(['auth', 'verified', 'role:admin' ]);
     Route::resource('anggaran', AnggaranController::class)->middleware(['auth', 'verified', 'role:admin|pegawai' ]);
+    Route::resource('kasbon', KasbonController::class)->middleware(['auth', 'verified', 'role:admin' ]);
 });
 
 
