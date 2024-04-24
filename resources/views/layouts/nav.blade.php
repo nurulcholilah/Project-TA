@@ -40,7 +40,7 @@
         @role('admin')
         <li>
             <a href="/saldo">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-dollar-circle'></i></div>
                 <div class="menu-title">Saldo</div>
             </a>
         </li>
@@ -49,13 +49,13 @@
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
         <li>
             <a href="/anggaran">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-columns'></i></div>
                 <div class="menu-title">Anggaran</div>
             </a>
         </li>
         <li>
             <a href="/kategori">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-collection'></i></div>
                 <div class="menu-title">Kategori</div>
             </a>
         </li>
@@ -74,13 +74,19 @@
         <li class="menu-label">Pencatatan</li>
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-dollar-circle'></i></div>
+                <div class="parent-icon"><i class='bx bx-coin-stack'></i></div>
                 <div class="menu-title">Transaksi</div>
             </a>
             <ul>
                 <li><a href="/pemasukan"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a></li>
                 <li><a href="/pengeluaran"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a></li>
             </ul>
+        </li>
+        <li>
+            <a href="/kasbon">
+                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="menu-title">Kasbon</div>
+            </a>
         </li>
         @endif
         <!-- <li>
