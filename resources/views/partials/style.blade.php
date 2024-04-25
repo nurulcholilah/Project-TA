@@ -24,10 +24,16 @@
  <link href="{{ url('assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
 
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+ <!-- Date Picker -->
+ <link href="{{ url('assets/plugins/datetimepicker/css/classic.css')}}" rel="stylesheet" />
+ <link href="{{ url('assets/plugins/datetimepicker/css/classic.time.css')}}" rel="stylesheet" />
+ <link href="{{ url('assets/plugins/datetimepicker/css/classic.date.css')}}" rel="stylesheet" />
+ <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css')}}">
+ <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
  <style>
-    /* merapikan tabel agar tidak scroll panjang ke samping */
-    .dataTables_wrapper {
+     /* merapikan tabel agar tidak scroll panjang ke samping */
+     .dataTables_wrapper {
          position: relative;
      }
 

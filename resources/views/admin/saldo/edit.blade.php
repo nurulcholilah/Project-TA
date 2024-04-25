@@ -31,7 +31,7 @@
                                 <div class="row mb-3">
                                     <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $data->tanggal }}" name="tanggal" id="tanggal" placeholder="Masukkan judul">
+                                        <input type="text" class="result form-control @error('tanggal') is-invalid @enderror" value="{{ $data->tanggal }}" name="tanggal" id="date" placeholder="Masukkan judul">
                                         @error('tanggal')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -54,7 +54,7 @@
                                 <div class="row mb-3">
                                     <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control @error('keterangan') is-invalid @enderror" rows="7" cols="50" name="keterangan" id="keterangan" placeholder="Masukkan keterangan">{{ $data->keterangan }}</textarea>
+                                        <textarea class="form-control @error('keterangan') is-invalid @enderror" rows="3" cols="20" name="keterangan" id="keterangan" placeholder="Masukkan keterangan">{{ $data->keterangan }}</textarea>
                                         @error('keterangan')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}

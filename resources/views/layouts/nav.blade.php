@@ -11,6 +11,7 @@
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
         <li>
             <a href="/dashboard">
                 <div class="parent-icon"><i class="bx bx-home"></i>
@@ -18,6 +19,7 @@
                 <div class="menu-title">Dashboard</div>
             </a>
         </li>
+        @endif
 
         <li class="menu-label">Master Data</li>
 
@@ -37,6 +39,16 @@
         </li>
         @endrole -->
 
+
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
+        <li>
+            <a href="/anggaran">
+                <div class="parent-icon"><i class='bx bx-columns'></i></div>
+                <div class="menu-title">Anggaran</div>
+            </a>
+        </li>
+        @endif
+
         @role('admin')
         <li>
             <a href="/saldo">
@@ -45,14 +57,8 @@
             </a>
         </li>
         @endrole
-        
+
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
-        <li>
-            <a href="/anggaran">
-                <div class="parent-icon"><i class='bx bx-columns'></i></div>
-                <div class="menu-title">Anggaran</div>
-            </a>
-        </li>
         <li>
             <a href="/kategori">
                 <div class="parent-icon"><i class='bx bx-collection'></i></div>
@@ -64,7 +70,7 @@
         @role('admin')
         <li>
             <a href="/jenisakun">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-receipt'></i></div>
                 <div class="menu-title">Jenis Akun</div>
             </a>
         </li>
@@ -84,7 +90,7 @@
         </li>
         <li>
             <a href="/kasbon">
-                <div class="parent-icon"><i class='bx bx-menu'></i></div>
+                <div class="parent-icon"><i class='bx bx-note'></i></div>
                 <div class="menu-title">Kasbon</div>
             </a>
         </li>

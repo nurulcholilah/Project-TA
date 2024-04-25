@@ -17,6 +17,16 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
+                            <p class="mb-1 text-white">Saldo Akhir</p>
+                            <h3 class="mb-3 text-white"> </h3>
+                            <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p> -->
+                            <div id="chart1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col border-end border-light-2">
+                    <div class="card bg-transparent shadow-none mb-0">
+                        <div class="card-body text-center">
                             <p class="mb-1 text-white">Total Pengeluaran</p>
                             <h3 class="mb-3 text-white">@currency($pengeluaran)</h3>
                             <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> last 7 days</p> -->
@@ -34,16 +44,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col border-end border-light-2">
+                <!-- <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
                             <p class="mb-1 text-white">Total Users</p>
                             <h3 class="mb-3 text-white">{{$jumlahUser}}</h3>
-                            <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 2.5%</span> vs last 7 days</p> -->
                             <div id="chart4"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!--end row-->
         </div>

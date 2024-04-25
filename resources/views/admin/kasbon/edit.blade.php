@@ -31,7 +31,7 @@
                                 <div class="row mb-3">
                                     <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{ $data->tanggal }}">
+                                        <input type="text" class="result form-control" name="tanggal" id="date" value="{{ $data->tanggal }}" placeholder="Masukkan tanggal">
                                         @error('tanggal')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -80,7 +80,7 @@
                                 <div class="row mb-3">
                                     <label for="tanggal_pembayaran" class="col-sm-3 col-form-label">Tanggal Bayar</label>
                                     <div class="col-sm-9">
-                                    <input type="date" class="form-control @error('tanggal_pembayaran') is-invalid @enderror" value="{{ $data->tanggal_pembayaran }}" name="tanggal_pembayaran" id="tanggal_pembayaran" value="{{ $data->tanggal_pembayaran }}">
+                                    <input type="date" class="form-control @error('tanggal_pembayaran') is-invalid @enderror" name="tanggal_pembayaran" id="tanggal_pembayaran" value="{{ $data->tanggal_pembayaran }}">
                                         @error('tanggal_pembayaran')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
