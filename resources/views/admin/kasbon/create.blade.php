@@ -30,7 +30,7 @@
                                 <div class="row mb-3">
                                     <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                        <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="tanggal">
+                                        <input type="text" class="result form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="date" placeholder="Masukkan tanggal">
                                         @error('tanggal')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}

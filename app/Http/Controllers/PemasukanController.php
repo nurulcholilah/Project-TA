@@ -38,7 +38,7 @@ class PemasukanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tanggal'   => 'required',
+            'tanggal'   => 'required|string',
             'uraian'    => 'required',
             'jumlah'    => 'required',
         ]);
