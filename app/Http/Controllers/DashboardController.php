@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
 use App\Models\Saldo;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -18,37 +17,37 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $pengeluaran = Pengeluaran::sum('jumlah');
-        $pemasukan = Pemasukan::sum('jumlah');
-        $totalSaldo = Saldo::sum('saldo');
-        $jumlahUser = User::count();
+        // Ambil saldo awal
+        $saldoAwal = Saldo::first()->saldo_awal ?? 0;
+        $saldoSaatIni = Saldo::first()->saldo ?? 0;
+
+        // Hitung total pengeluaran dan pemasukan
+        $pengeluaran = Pengeluaran::sum('jumlah') ?? 0;
+        $pemasukan = Pemasukan::sum('jumlah') ?? 0;
+
+        // Ambil jumlah user
+        // $jumlahUser = User::count();
 
         // Jumlah pemasukan dan pengeluaran bulan ini
         $currentMonth = Carbon::now()->month;
-        $pemasukanBulanIni = Pemasukan::whereMonth('tanggal', $currentMonth)->sum('jumlah');
-        $pengeluaranBulanIni = Pengeluaran::whereMonth('tanggal', $currentMonth)->sum('jumlah');
+        $pemasukanBulanIni = Pemasukan::whereMonth('tanggal', $currentMonth)->sum('jumlah') ?? 0;
+        $pengeluaranBulanIni = Pengeluaran::whereMonth('tanggal', $currentMonth)->sum('jumlah') ?? 0;
 
         // Jumlah pemasukan dan pengeluaran tahun ini
         $currentYear = Carbon::now()->year;
-        $pemasukanTahunIni = Pemasukan::whereYear('tanggal', $currentYear)->sum('jumlah');
-        $pengeluaranTahunIni = Pengeluaran::whereYear('tanggal', $currentYear)->sum('jumlah');
+        $pemasukanTahunIni = Pemasukan::whereYear('tanggal', $currentYear)->sum('jumlah') ?? 0;
+        $pengeluaranTahunIni = Pengeluaran::whereYear('tanggal', $currentYear)->sum('jumlah') ?? 0;
 
         return view('dashboard', [
+            'saldoAwal' => $saldoAwal,
+            'saldoSaatIni' => $saldoSaatIni,
             'pengeluaran' => $pengeluaran, 
             'pemasukan' => $pemasukan, 
-            'totalSaldo' => $totalSaldo, 
-            'jumlahUser' => $jumlahUser, 
+            // 'jumlahUser' => $jumlahUser,
             'pemasukanBulanIni' => $pemasukanBulanIni, 
             'pengeluaranBulanIni' => $pengeluaranBulanIni, 
             'pemasukanTahunIni' => $pemasukanTahunIni, 
             'pengeluaranTahunIni' => $pengeluaranTahunIni
         ]);
-
-        
     }
-
-    // public function get(){
-    //     $user = User::all();
-    //     return view('dashboard', compact('user'));
-    // }
 }

@@ -29,6 +29,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Kategori</th>
+                                <th>Jenis Akun</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -41,7 +42,8 @@
                             <tr>
                                 <td>{{ $no++ }} </td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
-                                <td>{{ $item->kategori->keterangan }}</td>
+                                <td>{{ $item->kategori ? $item->kategori->keterangan : 'Kategori tidak ditemukan' }}</td>
+                                <td>{{ $item->jenisAkun ? $item->jenisAkun->keterangan : 'Jenis Akun tidak ditemukan' }}</td>
                                 <td>@currency($item->jumlah)</td>
                                 <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
@@ -60,6 +62,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Kategori</th>
+                                <th>Jenis Akun</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

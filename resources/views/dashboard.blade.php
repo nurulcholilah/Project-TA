@@ -7,9 +7,8 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Saldo Awal</p>
-                            <h3 class="mb-3 text-white">@currency($totalSaldo)</h3>
-                            <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p> -->
+                            <p class="mb-1 text-white">SALDO AWAL</p>
+                            <h3 class="mb-3 text-white">@currency($saldoAwal)</h3>
                             <div id="chart1"></div>
                         </div>
                     </div>
@@ -17,9 +16,8 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Saldo Akhir</p>
-                            <h3 class="mb-3 text-white"> </h3>
-                            <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i>2.1%</span> vs last 7 days</p> -->
+                            <p class="mb-1 text-white">SALDO SAAT INI</p>
+                            <h3 class="mb-3 text-white">@currency($saldoSaatIni)</h3>
                             <div id="chart1"></div>
                         </div>
                     </div>
@@ -27,7 +25,7 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Total Pengeluaran</p>
+                            <p class="mb-1 text-white">TOTAL PENGELUARAN</p>
                             <h3 class="mb-3 text-white">@currency($pengeluaran)</h3>
                             <!-- <p class="font-13 text-white"><span class="text-success"><i class="lni lni-arrow-up"></i> 4.2% </span> last 7 days</p> -->
                             <div id="chart2"></div>
@@ -37,22 +35,13 @@
                 <div class="col border-end border-light-2">
                     <div class="card bg-transparent shadow-none mb-0">
                         <div class="card-body text-center">
-                            <p class="mb-1 text-white">Total Pemasukan</p>
+                            <p class="mb-1 text-white">TOTAL PEMASUKAN</p>
                             <h3 class="mb-3 text-white">@currency($pemasukan)</h3>
                             <!-- <p class="font-13 text-white"><span class="text-danger"><i class="lni lni-arrow-down"></i> 3.6%</span> vs last 7 days</p> -->
                             <div id="chart3"></div>
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col border-end border-light-2">
-                    <div class="card bg-transparent shadow-none mb-0">
-                        <div class="card-body text-center">
-                            <p class="mb-1 text-white">Total Users</p>
-                            <h3 class="mb-3 text-white">{{$jumlahUser}}</h3>
-                            <div id="chart4"></div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
             <!--end row-->
         </div>
