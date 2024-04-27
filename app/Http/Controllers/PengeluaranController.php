@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JenisAkun;
 use App\Models\Kategori;
 use App\Models\Pengeluaran;
+use App\Models\Saldo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -66,6 +67,10 @@ class PengeluaranController extends Controller
         $file = $request->file('file');
         $myfile = $file->getClientOriginalName();
         $file->move(public_path($destinationPath), $myfile);
+
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo -= $request->jumlah;
+        $saldoAwal->save();
 
         Pengeluaran::create([
             'file'        => $myfile,
@@ -140,6 +145,11 @@ class PengeluaranController extends Controller
 
         $pengeluaran = Pengeluaran::find($id);
 
+        $selisihJumlah = $request->jumlah - $pengeluaran->jumlah;
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo -= $selisihJumlah;
+        $saldoAwal->save();
+
         if ($request->hasFile('file')) {
             $oldFilePath = public_path('assets/images/file/' . $pengeluaran->file);
 
@@ -179,7 +189,14 @@ class PengeluaranController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('pengeluarans')->where('id_pengeluaran', $id)->delete();
+        $pengeluaran = Pengeluaran::findOrFail($id);
+
+        // Kurangi saldo dengan jumlah pengeluaran yang dihapus
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo += $pengeluaran->jumlah;
+        $saldoAwal->save();
+        $pengeluaran->delete();
+
         return redirect()->route('pengeluaran.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }

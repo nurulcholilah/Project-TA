@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemasukan;
+use App\Models\Saldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,16 +43,17 @@ class PemasukanController extends Controller
             'uraian'    => 'required',
             'jumlah'    => 'required',
         ]);
-    
-        // $total = Pemasukan::sum('jumlah') + $request->jumlah;
-    
+
         Pemasukan::create([
             'tanggal' => $request->tanggal,
             'uraian' => $request->uraian,
             'jumlah' => $request->jumlah,
-            // 'total' => $total,
         ]);
-    
+
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo += $request->jumlah;
+        $saldoAwal->save();
+
         return redirect()->route('pemasukan.index')->with('toast_success', 'Data berhasil disimpan');
     }
 
@@ -95,18 +97,21 @@ class PemasukanController extends Controller
             'uraian'    => 'required',
             'jumlah'    => 'required',
         ]);
-    
-        // $total = (Pemasukan::sum('jumlah') - Pemasukan::find($id)->jumlah) + $request->jumlah;
 
         $pemasukan = Pemasukan::find($id);
-    
+        $selisihJumlah = $request->jumlah - $pemasukan->jumlah;
+
         DB::table('pemasukans')->where('id_pemasukan', $id)->update([
             'tanggal'       => $request->tanggal,
             'uraian'        => $request->uraian,
             'jumlah'        => $request->jumlah,
             // 'total'         => $total,
         ]);
-    
+
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo += $selisihJumlah;
+        $saldoAwal->save();
+
         return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
     }
 
@@ -118,7 +123,14 @@ class PemasukanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('pemasukans')->where('id_pemasukan', $id)->delete();
+        $pemasukan = Pemasukan::findOrFail($id);
+
+        // Kurangi jumlah pemasukan dari saldo awal
+        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $saldoAwal->saldo -= $pemasukan->jumlah;
+        $saldoAwal->save();
+        $pemasukan->delete();
+
         return redirect()->route('pemasukan.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }

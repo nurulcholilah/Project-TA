@@ -39,6 +39,17 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <label for="saldo_awal" class="col-sm-3 col-form-label">Saldo Awal</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control @error('saldo_awal') is-invalid @enderror" name="saldo_awal" id="saldo_awal" placeholder="Masukkan saldo awal">
+                                        @error('saldo_awal')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <label for="saldo" class="col-sm-3 col-form-label">Saldo</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control @error('saldo') is-invalid @enderror" name="saldo" id="saldo" placeholder="Masukkan saldo">

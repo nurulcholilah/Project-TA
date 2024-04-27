@@ -33,6 +33,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
+                                <th>Saldo Awal</th>
                                 <th>Saldo</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>
@@ -46,6 +47,7 @@
                             <tr>
                                 <td>{{ $no++ }} </td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
+                                <td>@currency($item->saldo_awal) </td>
                                 <td>@currency($item->saldo) </td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td class="text-center">
@@ -62,6 +64,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
+                                <th>Saldo Awal</th>
                                 <th>Saldo</th>
                                 <th>Keterangan</th>
                                 <th>Aksi</th>

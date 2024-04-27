@@ -39,12 +39,14 @@ class SaldoController extends Controller
     {
         $this->validate($request, [
             'tanggal' => 'required',
+            'saldo_awal' => 'required',
             'saldo' => 'required',
             'keterangan' => 'required',
         ]);
 
         Saldo::create([
             'tanggal' => $request->tanggal,
+            'saldo_awal' => $request->saldo_awal,
             'saldo' => $request->saldo,
             'keterangan' => $request->keterangan,
         ]);
@@ -89,9 +91,9 @@ class SaldoController extends Controller
     {
         DB::table('saldos')->where('id_saldo', $id)->update([
             'tanggal'       => $request->tanggal,
+            'saldo_awal'    => $request->saldo_awal,
             'saldo'         => $request->saldo,
             'keterangan'    => $request->keterangan,
-
         ]);
 
         return redirect()->route('saldo.index')->with('toast_success', 'Data Berhasil Disimpan!');

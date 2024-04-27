@@ -43,15 +43,14 @@ class KategoriController extends Controller
             'jumlah' => 'required|numeric|min:0',
         ]);
 
-        // Dapatkan saldo terbaru dari tabel saldos
-        $saldo = DB::table('saldos')->latest('tanggal')->value('saldo');
+        // Dapatkan saldo awal terbaru dari tabel saldos
+        $saldo_awal = DB::table('saldos')->latest('tanggal')->value('saldo_awal');
 
         // Dapatkan total jumlah dari semua entri dalam tabel kategoris
         $totalKategori = DB::table('kategoris')->sum('jumlah');
 
-        // Validasi jumlah agar tidak melebihi saldo yang ada
-        if ($totalKategori + $request->jumlah > $saldo) {
-            // return redirect()->route('kategori.create')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+        // Validasi jumlah agar tidak melebihi saldo awal yang ada
+        if ($totalKategori + $request->jumlah > $saldo_awal) {
             return redirect()->back()->withInput();
         }
 
@@ -105,15 +104,14 @@ class KategoriController extends Controller
             'jumlah' => 'required|numeric|min:0',
         ]);
 
-        // Dapatkan saldo terbaru dari tabel saldos
-        $saldo = DB::table('saldos')->latest('tanggal')->value('saldo');
+        // Dapatkan saldo awal terbaru dari tabel saldos
+        $saldo_awal = DB::table('saldos')->latest('tanggal')->value('saldo_awal');
 
         // Dapatkan total jumlah dari semua entri dalam tabel kategoris, kecuali yang sedang diupdate
         $totalKategori = DB::table('kategoris')->where('id_kategori', '!=', $id)->sum('jumlah');
 
-        // Validasi jumlah agar tidak melebihi saldo yang ada
-        if ($totalKategori + $request->jumlah > $saldo) {
-            // return redirect()->route('kategori.edit')->with('error', 'Jumlah tidak boleh melebihi saldo yang ada.');
+        // Validasi jumlah agar tidak melebihi saldo awal yang ada
+        if ($totalKategori + $request->jumlah > $saldo_awal) {
             return redirect()->back()->withInput();
         }
 
