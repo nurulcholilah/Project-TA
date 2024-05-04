@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Form Edit Pemasukan</li>
+                        <li class="breadcrumb-item active" aria-current="page">Form Edit Tagihan</li>
                     </ol>
                 </nav>
             </div>
@@ -20,31 +20,20 @@
             <div class="mx-auto">
                 <div class="card border-top border-0 border-4 border-primary">
                     <div class="card-body">
-                        <form action="{{ route('pemasukan.update', $data->id_pemasukan) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('tagihan.update', $data->id_tagihan) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
-                                    <h5 class="mb-0">Edit Data Pemasukan</h5>
+                                    <h5 class="mb-0">Edit Data Tagihan</h5>
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
-                                    <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
+                                    <label for="keterangan" class="col-sm-3 col-form-label">keterangan</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="result form-control" name="tanggal" id="date" value="{{ $data->tanggal }}" placeholder="Masukkan tanggal">
-                                        @error('tanggal')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="uraian" class="col-sm-3 col-form-label">Uraian</label>
-                                    <div class="col-sm-9">
-                                        <input type="hidden" name="id_pemasukan" value="{{ $data->id_pemasukan }}">
-                                        <input type="text" class="form-control @error('uraian') is-invalid @enderror" value="{{ $data->uraian }}" name="uraian" id="uraian" placeholder="Masukkan uraian" value="{{ $data->uraian }}">
-                                        @error('uraian')
+                                        <input type="hidden" name="id_tagihan" value="{{ $data->id_tagihan }}">
+                                        <input type="text" class="form-control @error('keterangan') is-invalid @enderror" value="{{ $data->keterangan }}" name="keterangan" id="keterangan" placeholder="Masukkan keterangan" value="{{ $data->keterangan }}">
+                                        @error('keterangan')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -62,17 +51,17 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <!-- <div class="row mb-3">
-                                    <label for="total" class="col-sm-3 col-form-label">Total</label>
+                                <div class="row mb-3">
+                                    <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control @error('total') is-invalid @enderror" value="{{ $data->total }}" name="total" id="total" placeholder="Masukkan total" value="{{ $data->total }}">
-                                        @error('total')
+                                        <input type="text" class="result form-control" name="tanggal" id="date" value="{{ $data->tanggal }}" placeholder="Masukkan tanggal">
+                                        @error('tanggal')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
-                                </div> -->
+                                </div>
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">

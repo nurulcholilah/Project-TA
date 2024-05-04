@@ -21,7 +21,6 @@
                         <h5 class="card-title">Informasi Pengeluaran</h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($data->tanggal)->format('d/m/Y') }}</li>
-                            <li class="list-group-item"><strong>Jenis:</strong> {{ $data->jenisAkun ? $data->jenisAkun->keterangan : 'Tidak ditemukan' }}</li>
                             <li class="list-group-item"><strong>Kode Akun:</strong> {{ $data->kode_akun }}</li>
                             <li class="list-group-item"><strong>Kategori:</strong> {{ $data->kategori ? $data->kategori->keterangan : 'Tidak ditemukan' }}</li>
                             <li class="list-group-item"><strong>Uraian:</strong> {{ $data->uraian }}</li>

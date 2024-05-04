@@ -50,22 +50,6 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="jenis_akun_id" class="col-sm-3 col-form-label">Jenis Akun</label>
-                                    <div class="col-sm-9">
-                                        <select name="jenis_akun_id" id="jenis_akun_id" class="form-control @error('jenis_akun_id') is-invalid @enderror">
-                                            <option value="">- Pilih -</option>
-                                            @foreach($jenisAkun as $item)
-                                            <option value="{{ $item->id_jenis_akun }}">{{ $item->keterangan }}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('jenis_akun_id')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
                                     <label for="kode_akun" class="col-sm-3 col-form-label">Kode Akun</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control @error('kode_akun') is-invalid @enderror" name="kode_akun" id="kode_akun" placeholder="Masukkan kode akun" value="{{ old('kode_akun') }}">

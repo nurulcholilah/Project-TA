@@ -32,8 +32,7 @@ class PengeluaranController extends Controller
     {
         $today = Carbon::today()->format('d/m/Y');
         $kategori = Kategori::all();
-        $jenisAkun = JenisAkun::all();
-        return view('admin.pengeluaran.create', compact('today', 'kategori', 'jenisAkun'));
+        return view('admin.pengeluaran.create', compact('today', 'kategori'));
     }
 
     /**
@@ -47,7 +46,6 @@ class PengeluaranController extends Controller
         $this->validate($request, [
             'file'        => 'required|file|mimes:jpeg,png,jpg,gif,svg,webp,pdf|max:2048',
             'tanggal'     => 'required',
-            'jenis_akun_id'  => 'required',
             'kode_akun'   => 'required',
             'kategori_id' => 'required',
             'uraian'      => 'required',
@@ -75,7 +73,6 @@ class PengeluaranController extends Controller
         Pengeluaran::create([
             'file'        => $myfile,
             'tanggal'     => $request->tanggal,
-            'jenis_akun_id'  => $request->jenis_akun_id,
             'kode_akun'   => $request->kode_akun,
             'kategori_id' => $request->kategori_id,
             'uraian'      => $request->uraian,
@@ -98,8 +95,7 @@ class PengeluaranController extends Controller
     {
         $data = Pengeluaran::findOrFail($id);
         $kategori = Kategori::all();
-        $jenisAkun = JenisAkun::all();
-        return view('admin.pengeluaran.show', compact('data', 'kategori', 'jenisAkun'));
+        return view('admin.pengeluaran.show', compact('data', 'kategori'));
     }
 
     /**
@@ -110,10 +106,9 @@ class PengeluaranController extends Controller
      */
     public function edit($id)
     {
-        $jenisAkun = JenisAkun::all();
         $kategori = Kategori::all();
         $data = Pengeluaran::find($id);
-        return view('admin.pengeluaran.edit', compact('data', 'kategori', 'jenisAkun'));
+        return view('admin.pengeluaran.edit', compact('data', 'kategori'));
     }
 
     /**
@@ -128,7 +123,6 @@ class PengeluaranController extends Controller
         $this->validate($request, [
             'file'        => 'file|mimes:jpeg,png,jpg,gif,svg,webp,pdf|max:2048',
             'tanggal'     => 'required',
-            'jenis_akun_id'  => 'required',
             'kode_akun'   => 'required',
             'kategori_id' => 'required',
             'uraian'      => 'required',
@@ -168,7 +162,6 @@ class PengeluaranController extends Controller
         }
 
         $pengeluaran->tanggal = $request->tanggal;
-        $pengeluaran->jenis_akun_id = $request->jenis_akun_id;
         $pengeluaran->kode_akun = $request->kode_akun;
         $pengeluaran->kategori_id = $request->kategori_id;
         $pengeluaran->uraian = $request->uraian;

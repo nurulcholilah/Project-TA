@@ -5,8 +5,33 @@
             </div>
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item dropdown dropdown-large">
-                    </li>
+                    @role('admin')
+                    <!-- <li class="nav-item dropdown dropdown-large">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="alert-count">{{ count(Auth::user()->unreadNotifications) }}</span>
+                            <i class='bx bx-bell'></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="javascript:;">
+                                <div class="msg-header">
+                                    <p class="msg-header-title">Notifications</p>
+                                </div>
+                            </a>
+                            <div class="header-notifications-list">
+                                @foreach (Auth::user()->unreadNotifications as $notification)
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <div class="d-flex align-items-center">
+                                            <div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i></div>
+                                            <div class="flex-grow-1">
+                                                <h6 class="msg-name">{{ $notification->data['message'] }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </li> -->
+                    @endrole
                     <li class="nav-item dropdown dropdown-large">
                         <div class="dropdown-menu dropdown-menu-end">
                             <a href="javascript:;">
