@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Form Edit Pemasukan</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tambah Pengajuan</li>
                     </ol>
                 </nav>
             </div>
@@ -20,19 +20,23 @@
             <div class="mx-auto">
                 <div class="card border-top border-0 border-4 border-primary">
                     <div class="card-body">
-                        <form action="{{ route('pemasukan.update', $data->id_pemasukan) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('pengajuan.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
-                                    <h5 class="mb-0">Edit Data Pemasukan</h5>
+                                    <h5 class="mb-0">Tambah Data Pengajuan</h5>
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
-                                    <label for="tanggal" class="col-sm-3 col-form-label">Tanggal</label>
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Kategori</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="result form-control" name="tanggal" id="date" value="{{ $data->tanggal }}" placeholder="Masukkan tanggal">
-                                        @error('tanggal')
+                                        <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
+                                            <option value="">- Pilih -</option>
+                                            @foreach($kategori as $item)
+                                            <option value="{{ $item->id_kategori }}">{{ $item->keterangan }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('kategori_id')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
@@ -42,8 +46,7 @@
                                 <div class="row mb-3">
                                     <label for="uraian" class="col-sm-3 col-form-label">Uraian</label>
                                     <div class="col-sm-9">
-                                        <input type="hidden" name="id_pemasukan" value="{{ $data->id_pemasukan }}">
-                                        <input type="text" class="form-control @error('uraian') is-invalid @enderror" value="{{ $data->uraian }}" name="uraian" id="uraian" placeholder="Masukkan uraian" value="{{ $data->uraian }}">
+                                        <input type="text" class="form-control @error('uraian') is-invalid @enderror" name="uraian" id="uraian" placeholder="Masukkan uraian" value="{{ old('uraian') }}">
                                         @error('uraian')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
@@ -52,27 +55,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="jumlah" class="col-sm-3 col-form-label">Jumlah</label>
+                                    <label for="jumlah_biaya" class="col-sm-3 col-form-label">Jumlah Biaya</label>
                                     <div class="col-sm-9">
-                                    <input type="text" class="form-control @error('jumlah') is-invalid @enderror" value="{{ $data->jumlah }}" name="jumlah" id="jumlah" placeholder="Masukkan jumlah" value="{{ $data->jumlah }}">
-                                        @error('jumlah')
+                                        <input type="text" class="form-control @error('jumlah_biaya') is-invalid @enderror" name="jumlah_biaya" id="jumlah_biaya" placeholder="Masukkan jumlah biaya" value="{{ old('jumlah_biaya') }}">
+                                        @error('jumlah_biaya')
                                         <div class="alert alert-danger mt-2">
                                             {{ $message }}
                                         </div>
                                         @enderror
                                     </div>
                                 </div>
-                                <!-- <div class="row mb-3">
-                                    <label for="total" class="col-sm-3 col-form-label">Total</label>
-                                    <div class="col-sm-9">
-                                    <input type="text" class="form-control @error('total') is-invalid @enderror" value="{{ $data->total }}" name="total" id="total" placeholder="Masukkan total" value="{{ $data->total }}">
-                                        @error('total')
-                                        <div class="alert alert-danger mt-2">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div> -->
                                 <div class="row">
                                     <label class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-9">
