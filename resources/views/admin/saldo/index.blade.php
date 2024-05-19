@@ -18,13 +18,8 @@
         <!--end breadcrumb-->
         <div class="card">
             <div class="card-header">
-                @if ($data->isEmpty())
                 <a href="{{ route('saldo.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
                     <i class="bx bxs-plus-square"></i>Input Saldo</a>
-                @else
-                <a href="{{ route('saldo.edit', $data[0]->id_saldo) }}" class="btn btn-primary radius-30 mt-2 mt-lg-0 float-end">
-                    <i class="bx bxs-edit"></i>Edit Saldo</a>
-                @endif
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -52,6 +47,7 @@
                                 <td>{{ $item->keterangan }}</td>
                                 <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('saldo.destroy', $item->id_saldo) }}" method="POST">
+                                        <a href="{{ route('saldo.edit', $item->id_saldo) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>

@@ -5,6 +5,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JenisAkunController;
 use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanPemasukanController;
+use App\Http\Controllers\LaporanPengeluaranController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\PengeluaranController;
@@ -49,6 +52,13 @@ Route::middleware(['auth', 'verified',])->group(function () {
     Route::resource('pengajuan', PengajuanController::class)->middleware(['auth', 'verified', 'role:admin|pegawai']);
     Route::post('/pengajuan/{id}/approve', [PengajuanController::class, 'approve'])->name('pengajuan.approve')->middleware(['auth', 'verified', 'role:admin']);
     Route::post('/pengajuan/{id}/reject', [PengajuanController::class, 'reject'])->name('pengajuan.reject')->middleware(['auth', 'verified', 'role:admin']);
+    Route::get('laporan-pemasukan', [LaporanPemasukanController::class, 'index'])->name('laporan.pemasukan')->middleware(['auth', 'verified', 'role:admin|pegawai']);
+    Route::get('/laporan-pemasukan/pdf', [LaporanPemasukanController::class, 'exportPDF'])->name('laporan.pemasukan.pdf');
+    Route::get('laporan-pengeluaran', [LaporanPengeluaranController::class, 'index'])->name('laporan.pengeluaran')->middleware(['auth', 'verified', 'role:admin|pegawai']);
+    Route::get('/laporan-pengeluaran/pdf', [LaporanPengeluaranController::class, 'exportPDF'])->name('laporan.pengeluaran.pdf');
+
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index')->middleware(['auth', 'verified', 'role:admin|pegawai']);
+    Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('laporan.exportPDF');
 });
 
 require __DIR__ . '/auth.php';

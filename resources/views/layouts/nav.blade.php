@@ -82,12 +82,6 @@
 
         @role('admin')
         <li class="menu-label">Kelola</li>
-        <li>
-            <a href="/user">
-                <div class="parent-icon"><i class='bx bx-user'></i></div>
-                <div class="menu-title">User</div>
-            </a>
-        </li>
         @endrole
 
         @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('pegawai'))
@@ -101,12 +95,31 @@
 
         @role('admin|pegawai')
         <!-- <li>
-            <a href="/laporan">
-                <div class="parent-icon"><i class='bx bx-folder'></i>
-                </div>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-file'></i></div>
                 <div class="menu-title">Laporan</div>
             </a>
+            <ul>
+                <li><a href="/laporan"><i class="bx bx-right-arrow-alt"></i>Laporan</a></li>
+                <li><a href="/laporan-pemasukan"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a></li>
+                <li><a href="/laporan-pengeluaran"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a></li>
+            </ul>
         </li> -->
+        <li>
+            <a href="/laporan">
+                <div class="parent-icon"><i class='bx bx-file'></i></div>
+                <div class="menu-title">Laporan</div>
+            </a>
+        </li>
+        @endrole
+
+        @role('admin')
+        <li>
+            <a href="/user">
+                <div class="parent-icon"><i class='bx bx-user'></i></div>
+                <div class="menu-title">User</div>
+            </a>
+        </li>
         @endrole
     </ul>
     <!--end navigation-->
