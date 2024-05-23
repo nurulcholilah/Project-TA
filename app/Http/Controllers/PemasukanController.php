@@ -44,13 +44,21 @@ class PemasukanController extends Controller
             'jumlah'    => 'required',
         ]);
 
+        // Ambil tahun dari tanggal pemasukan
+        $tahun = date('Y', strtotime($request->tanggal));
+
+        // Cek apakah ada saldo awal untuk tahun yang sesuai
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
+
         Pemasukan::create([
             'tanggal' => $request->tanggal,
             'uraian' => $request->uraian,
             'jumlah' => $request->jumlah,
         ]);
 
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
         $saldoAwal->saldo += $request->jumlah;
         $saldoAwal->save();
 
@@ -93,7 +101,7 @@ class PemasukanController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'tanggal'   => 'required',
+            'tanggal'   => 'required|string',
             'uraian'    => 'required',
             'jumlah'    => 'required',
         ]);
@@ -101,14 +109,18 @@ class PemasukanController extends Controller
         $pemasukan = Pemasukan::find($id);
         $selisihJumlah = $request->jumlah - $pemasukan->jumlah;
 
-        DB::table('pemasukans')->where('id_pemasukan', $id)->update([
-            'tanggal'       => $request->tanggal,
-            'uraian'        => $request->uraian,
-            'jumlah'        => $request->jumlah,
-            // 'total'         => $total,
+        $tahun = date('Y', strtotime($request->tanggal));
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
+
+        $pemasukan->update([
+            'tanggal' => $request->tanggal,
+            'uraian' => $request->uraian,
+            'jumlah' => $request->jumlah,
         ]);
 
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
         $saldoAwal->saldo += $selisihJumlah;
         $saldoAwal->save();
 
@@ -124,9 +136,11 @@ class PemasukanController extends Controller
     public function destroy($id)
     {
         $pemasukan = Pemasukan::findOrFail($id);
-
-        // Kurangi jumlah pemasukan dari saldo awal
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $tahun = date('Y', strtotime($pemasukan->tanggal));
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
         $saldoAwal->saldo -= $pemasukan->jumlah;
         $saldoAwal->save();
         $pemasukan->delete();

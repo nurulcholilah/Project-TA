@@ -28,9 +28,8 @@ class LaporanPemasukanController extends Controller
 
         $data = $dataQuery->get();
         $totalPemasukan = $data->sum('jumlah');
-        $saldo = Saldo::first()->saldo ?? 0;
 
-        return view('admin.laporan.pemasukan', compact('data', 'totalPemasukan', 'saldo', 'year'));
+        return view('admin.laporan.pemasukan', compact('data', 'totalPemasukan', 'year'));
     }
 
     public function exportPDF(Request $request)
@@ -39,20 +38,24 @@ class LaporanPemasukanController extends Controller
         $end_date = $request->input('end_date');
         $year = $request->input('year');
 
-        if ($start_date && $end_date) {
-            $data = Pemasukan::whereBetween('tanggal', [$start_date, $end_date])->get();
-        } elseif ($year) { 
-            $data = Pemasukan::whereYear('tanggal', $year)->get();
+        // Periksa apakah terdapat parameter filter dalam URL
+        if ($start_date || $end_date || $year) {
+            if ($start_date && $end_date) {
+                $data = Pemasukan::whereBetween('tanggal', [$start_date, $end_date])->get();
+            } elseif ($year) {
+                $data = Pemasukan::whereYear('tanggal', $year)->get();
+            } else {
+                $data = Pemasukan::latest()->get();
+            }
+
+            $totalPemasukan = $data->sum('jumlah');
+
+            $pdf = app('dompdf.wrapper');
+            $pdf->loadView('admin.laporan.pemasukan_pdf', compact('data', 'totalPemasukan', 'start_date', 'end_date', 'year'));
+
+            return $pdf->download('laporan_pemasukan.pdf');
         } else {
-            $data = Pemasukan::latest()->get();
+            return redirect()->back()->with('error', 'Silakan filter data terlebih dahulu sebelum mengekspor sebagai PDF.');
         }
-
-        $totalPemasukan = $data->sum('jumlah');
-        $saldo = Saldo::first()->saldo ?? 0;
-
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadView('admin.laporan.pemasukan_pdf', compact('data', 'totalPemasukan', 'saldo', 'start_date', 'end_date', 'year'));
-
-        return $pdf->download('laporan_pemasukan.pdf');
     }
 }

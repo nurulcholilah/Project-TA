@@ -8,9 +8,8 @@
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Pemasukan</li>
+                        <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Laporan Keuangan</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +25,7 @@
                             <span class="input-group-text bg-transparent"><i class='bx bx-calendar'></i></span>
                             <select class="form-select form-select-sm" id="year" name="year">
                                 <option value="" selected>Pilih Tahun</option>
-                                @for ($i = date('Y'); $i >= 2010; $i--)
+                                @for ($i = date('Y') + 2; $i >= 2020; $i--)
                                 <option value="{{ $i }}" @if(request()->input('year') == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>
@@ -40,13 +39,13 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <h7>&nbsp;</h7> <!-- Placeholder column for alignment -->
+                        <h7>&nbsp;</h7>
                         <div class="input-group">
                             <span class="input-group-text bg-transparent"><i class='bx bx-calendar'></i></span>
                             <input type="date" class="form-control form-control-sm" id="end_date" name="end_date" value="{{ request()->input('end_date') }}" placeholder="Sampai Tanggal">
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-3">
                         <button type="submit" class="btn btn-primary me-2">Filter</button>
                         <a href="{{ route('laporan.index') }}" class="btn btn-secondary me-2">Reset</a>
                         <a href="{{ route('laporan.exportPDF', request()->input()) }}" class="btn btn-danger">PDF</a>
@@ -56,6 +55,8 @@
         </div>
         <div class="card">
             <div class="card-body">
+                @if(request()->filled('year') || request()->filled('start_date') || request()->filled('end_date'))
+                @if ($data->count() > 0)
                 <h5>Data Pemasukan dan Pengeluaran</h5>
                 <br>
                 <div class="table-responsive">
@@ -65,41 +66,56 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Uraian</th>
-                                <th>Debit</th>
-                                <th>Kredit</th>
+                                <th>Pemasukan</th>
+                                <th>Pengeluaran</th>
+                                <th>Saldo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no = 1; $totalPemasukan = 0; $totalPengeluaran = 0; @endphp
+                            @php
+                            $no = 1;
+                            $runningSaldo = $saldoAwal;
+                            $totalPemasukan = 0;
+                            $totalPengeluaran = 0;
+                            @endphp
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>-</td>
+                                <td>Saldo Awal</td>
+                                <td></td>
+                                <td></td>
+                                <td>@currency($runningSaldo)</td>
+                            </tr>
                             @foreach ($data as $item)
                             <tr>
-                                <td>{{ $no++ }} </td>
-                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                                 <td>{{ $item->uraian }}</td>
-                                <td>@if ($item instanceof App\Models\Pemasukan) {{ $item->jumlah }} @else 0 @endif</td>
-                                <td>@if ($item instanceof App\Models\Pengeluaran) {{ $item->jumlah }} @else 0 @endif</td>
-                                @php
-                                    if ($item instanceof App\Models\Pemasukan) {
-                                        $totalPemasukan += $item->jumlah;
-                                    } else {
-                                        $totalPengeluaran += $item->jumlah;
-                                    }
-                                @endphp
+                                <td>@if ($item instanceof \App\Models\Pemasukan) @currency($item->jumlah) @php $totalPemasukan += $item->jumlah; @endphp @else @endif</td>
+                                <td>@if ($item instanceof \App\Models\Pengeluaran) @currency($item->jumlah) @php $totalPengeluaran += $item->jumlah; @endphp @else @endif</td>
+                                @if ($item instanceof \App\Models\Pemasukan)
+                                @php $runningSaldo += $item->jumlah; @endphp
+                                @else
+                                @php $runningSaldo -= $item->jumlah; @endphp
+                                @endif
+                                <td>@currency($runningSaldo)</td>
                             </tr>
                             @endforeach
+                            <tr>
+                                <td colspan="3"><strong>Total</strong></td>
+                                <td><b>@currency($totalPemasukan)</b></td>
+                                <td><b>@currency($totalPengeluaran)</b></td>
+                                <td><b>@currency($runningSaldo)</b></td>
+                            </tr>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="4" style="text-align: right;">Total Pemasukan</th>
-                                <td><strong>@currency($totalPemasukan)</strong></td>
-                            </tr>
-                            <tr>
-                                <th colspan="4" style="text-align: right;">Total Pengeluaran</th>
-                                <td><strong>@currency($totalPengeluaran)</strong></td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
+                @else
+                <p style="text-align: center;">Tidak ada data yang ditemukan untuk filter yang Anda pilih.</p>
+                @endif
+                @else
+                <p style="text-align: center;">Silakan gunakan form filter di atas untuk memfilter laporan keuangan.</p>
+                @endif
             </div>
         </div>
     </div>

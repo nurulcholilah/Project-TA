@@ -26,7 +26,7 @@
                             <span class="input-group-text bg-transparent"><i class='bx bx-calendar'></i></span>
                             <select class="form-select form-select-sm" id="year" name="year">
                                 <option value="" selected>Pilih Tahun</option>
-                                @for ($i = date('Y'); $i >= 2010; $i--)
+                                @for ($i = date('Y') +2; $i >= 2020; $i--)
                                 <option value="{{ $i }}" @if(request()->input('year') == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>
@@ -40,13 +40,13 @@
                         </div>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <h7>&nbsp;</h7> <!-- Placeholder column for alignment -->
+                        <h7>&nbsp;</h7>
                         <div class="input-group">
                             <span class="input-group-text bg-transparent"><i class='bx bx-calendar'></i></span>
                             <input type="date" class="form-control form-control-sm" id="end_date" name="end_date" value="{{ request()->input('end_date') }}" placeholder="Sampai Tanggal">
                         </div>
                     </div>
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-3">
                         <button type="submit" class="btn btn-primary me-2">Filter</button>
                         <a href="{{ route('laporan.pemasukan') }}" class="btn btn-secondary me-2">Reset</a>
                         <a href="{{ route('laporan.pemasukan.pdf', request()->input()) }}" class="btn btn-danger">PDF</a>
@@ -56,6 +56,8 @@
         </div>
         <div class="card">
             <div class="card-body">
+                @if(request()->filled('year') || request()->filled('start_date') || request()->filled('end_date'))
+                @if(count($data) > 0)
                 <h5>Data Pemasukan</h5>
                 <br>
                 <div class="table-responsive">
@@ -83,19 +85,19 @@
                         <tfoot>
                             <tfoot>
                                 <tr>
-                                    <th colspan="3" style="text-align: right;">Total Pemasukan</th>
+                                    <th colspan="3"><strong>Total Pemasukan</strong></th>
                                     <td><strong>@currency($totalPemasukan)</strong></td>
                                 </tr>
-                                @if ($saldo)
-                                <tr>
-                                    <th colspan="3" style="text-align: right;">Sisa Saldo</th>
-                                    <td><strong>@currency($saldo)</strong></td>
-                                </tr>
-                                @endif
                             </tfoot>
                         </tfoot>
                     </table>
                 </div>
+                @else
+                <p style="text-align: center;">Tidak ada data yang ditemukan untuk filter yang Anda pilih.</p>
+                @endif
+                @else
+                <p style="text-align: center;">Silakan gunakan form filter di atas untuk memfilter laporan pemasukan.</p>
+                @endif
             </div>
         </div>
     </div>
