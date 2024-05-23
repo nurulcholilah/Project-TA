@@ -28,9 +28,8 @@ class LaporanPengeluaranController extends Controller
 
         $data = $dataQuery->get();
         $totalPengeluaran = $data->sum('jumlah');
-        $saldo = Saldo::first()->saldo ?? 0;
 
-        return view('admin.laporan.pengeluaran', compact('data', 'totalPengeluaran', 'saldo', 'year'));
+        return view('admin.laporan.pengeluaran', compact('data', 'totalPengeluaran', 'year'));
     }
 
     public function exportPDF(Request $request)
@@ -39,20 +38,23 @@ class LaporanPengeluaranController extends Controller
         $end_date = $request->input('end_date');
         $year = $request->input('year');
 
-        if ($start_date && $end_date) {
-            $data = Pengeluaran::whereBetween('tanggal', [$start_date, $end_date])->first()->get();
-        } elseif ($year) { 
-            $data = Pengeluaran::whereYear('tanggal', $year)->first()->get();
+        // Periksa apakah terdapat parameter filter dalam URL
+        if ($start_date || $end_date || $year) {
+            if ($start_date && $end_date) {
+                $data = Pengeluaran::whereBetween('tanggal', [$start_date, $end_date])->get();
+            } elseif ($year) {
+                $data = Pengeluaran::whereYear('tanggal', $year)->get();
+            } else {
+                $data = Pengeluaran::latest()->get();
+            }
+
+            $totalPengeluaran = $data->sum('jumlah');
+            $pdf = app('dompdf.wrapper');
+            $pdf->loadView('admin.laporan.pengeluaran_pdf', compact('data', 'totalPengeluaran', 'start_date', 'end_date', 'year'));
+
+            return $pdf->download('laporan_pengeluaran.pdf');
         } else {
-            $data = Pengeluaran::latest()->get();
+            return redirect()->back()->with('error', 'Silakan filter data terlebih dahulu sebelum mengekspor sebagai PDF.');
         }
-
-        $totalPengeluaran = $data->sum('jumlah');
-        $saldo = Saldo::first()->saldo ?? 0;
-
-        $pdf = app('dompdf.wrapper');
-        $pdf->loadView('admin.laporan.pengeluaran_pdf', compact('data', 'totalPengeluaran', 'saldo', 'start_date', 'end_date', 'year'));
-
-        return $pdf->download('laporan_pengeluaran.pdf');
     }
 }

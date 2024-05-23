@@ -55,18 +55,21 @@ class PengeluaranController extends Controller
             'tdspj'       => 'required',
         ]);
 
-        // Validate if SPJ and Tidak SPJ sum up to Jumlah
         if ($request->spj + $request->tdspj != $request->jumlah) {
             return redirect()->back()->withInput()->withErrors(['spj' => 'Jumlah SPJ dan Tidak SPJ harus sama dengan Jumlah']);
         }
 
-        //upload img
         $destinationPath = 'assets/images/file';
         $file = $request->file('file');
         $myfile = $file->getClientOriginalName();
         $file->move(public_path($destinationPath), $myfile);
 
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $tahun = date('Y', strtotime($request->tanggal));
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
+
         $saldoAwal->saldo -= $request->jumlah;
         $saldoAwal->save();
 
@@ -132,27 +135,27 @@ class PengeluaranController extends Controller
             'tdspj'       => 'required',
         ]);
 
-        // Validate if SPJ and Tidak SPJ sum up to Jumlah
         if ($request->spj + $request->tdspj != $request->jumlah) {
             return redirect()->back()->withInput()->withErrors(['spj' => 'Jumlah SPJ dan Tidak SPJ harus sama dengan Jumlah']);
         }
 
         $pengeluaran = Pengeluaran::find($id);
-
         $selisihJumlah = $request->jumlah - $pengeluaran->jumlah;
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $tahun = date('Y', strtotime($request->tanggal));
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
+
         $saldoAwal->saldo -= $selisihJumlah;
         $saldoAwal->save();
 
         if ($request->hasFile('file')) {
             $oldFilePath = public_path('assets/images/file/' . $pengeluaran->file);
-
-            // Periksa apakah file lama ada di folder
             if (file_exists($oldFilePath)) {
-                unlink($oldFilePath); // Hapus file lama
+                unlink($oldFilePath);
             }
 
-            // Upload file baru
             $file = $request->file('file');
             $destinationPath = 'assets/images/file';
             $myfile = $file->getClientOriginalName();
@@ -183,13 +186,14 @@ class PengeluaranController extends Controller
     public function destroy($id)
     {
         $pengeluaran = Pengeluaran::findOrFail($id);
-
-        // Kurangi saldo dengan jumlah pengeluaran yang dihapus
-        $saldoAwal = Saldo::orderBy('id_saldo', 'asc')->first();
+        $tahun = date('Y', strtotime($pengeluaran->tanggal));
+        $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
+        if (!$saldoAwal) {
+            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+        }
         $saldoAwal->saldo += $pengeluaran->jumlah;
         $saldoAwal->save();
         $pengeluaran->delete();
-
         return redirect()->route('pengeluaran.index')->with('info', 'Data Berhasil Dihapus!');
     }
 }

@@ -9,39 +9,55 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            font-size: 12px;
+            font-size: 14px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
         }
         h2 {
             text-align: center;
-            margin-bottom: 1px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
         .date-range {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 5px;
+            padding: 8px;
             text-align: left;
         }
         th {
             background-color: #f2f2f2;
-            font-size: 12px;
+        }
+        .total-row td {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        hr {
+            border: 0;
+            border-top: 1px solid #000;
+            margin: 10px auto;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <h2>LAPORAN PEMASUKAN<br>BADAN PERTANAHAN NASIONAL<br>KABUPATEN SUMENEP</h2>
+    <h1>LAPORAN PEMASUKAN</h1>
+    <h2>BADAN PERTANAHAN NASIONAL<br>KABUPATEN SUMENEP</h2>
+    <hr>
     <div class="date-range">
         @if($start_date && $end_date)
-            <p>Periode {{ \Carbon\Carbon::parse($start_date)->format('d-m-Y') }} sampai {{ \Carbon\Carbon::parse($end_date)->format('d-m-Y') }}</p>
+            <p>Tanggal {{ \Carbon\Carbon::parse($start_date)->format('d/m/Y') }} sampai {{ \Carbon\Carbon::parse($end_date)->format('d/m/Y') }}</p>
         @elseif($year)
             <p>Tahun {{ $year }}</p>
         @else
@@ -62,7 +78,7 @@
             @foreach ($data as $item)
                 <tr>
                     <td>{{ $no++ }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                     <td>{{ $item->uraian }}</td>
                     <td>@currency($item->jumlah)</td>
                     @php $totalPemasukan += $item->jumlah; @endphp
@@ -70,16 +86,10 @@
             @endforeach
         </tbody>
         <tfoot>
-            <tr>
-                <th colspan="3" style="text-align: right;">Total Pemasukan</th>
-                <td><strong>@currency($totalPemasukan)</strong></td>
+            <tr class="total-row">
+                <td colspan="3"><strong>Total Pemasukan</strong></td>
+                <td><b>@currency($totalPemasukan)</b></td>
             </tr>
-            @if ($saldo)
-                <tr>
-                    <th colspan="3" style="text-align: right;">Sisa Saldo</th>
-                    <td><strong>@currency($saldo)</strong></td>
-                </tr>
-            @endif
         </tfoot>
     </table>
 </body>

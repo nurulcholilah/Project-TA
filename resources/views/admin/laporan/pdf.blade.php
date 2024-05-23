@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,43 +10,69 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
         h2 {
             text-align: center;
-            margin-bottom: 1px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
+
         .date-range {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
-            font-size: 12px;
+            font-size: 14px;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 5px;
+
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
-            font-size: 12px;
+        }
+
+        .total-row td {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #000;
+            margin: 2px auto;
+            width: 100%;
         }
     </style>
 </head>
+
 <body>
-    <h2>LAPORAN PEMASUKAN<br>BADAN PERTANAHAN NASIONAL<br>KABUPATEN SUMENEP</h2>
+    <h1>LAPORAN KEUANGAN</h1>
+    <h2>BADAN PERTANAHAN NASIONAL<br>KABUPATEN SUMENEP</h2>
+    <hr>
     <div class="date-range">
         @if($start_date && $end_date)
-            <p>Periode {{ \Carbon\Carbon::parse($start_date)->format('d-m-Y') }} sampai {{ \Carbon\Carbon::parse($end_date)->format('d-m-Y') }}</p>
+        <p>Tanggal {{ \Carbon\Carbon::parse($start_date)->format('d/m/Y') }} sampai {{ \Carbon\Carbon::parse($end_date)->format('d/m/Y') }}</p>
         @elseif($year)
-            <p>Tahun {{ $year }}</p>
+        <p>Tahun {{ $year }}</p>
         @else
-            <p>Semua Data Pemasukan</p>
+        <p>Semua Data</p>
         @endif
     </div>
     <table>
@@ -54,39 +81,49 @@
                 <th>No</th>
                 <th>Tanggal</th>
                 <th>Uraian</th>
-                <th>Debit</th>
-                <th>Kredit</th>
+                <th>Pemasukan</th>
+                <th>Pengeluaran</th>
+                <th>Saldo</th>
             </tr>
         </thead>
         <tbody>
-            @php $no = 1; $totalPemasukan = 0; $totalPengeluaran = 0; @endphp
+            @php
+            $no = 1;
+            $totalPemasukan = 0;
+            $totalPengeluaran = 0;
+            $runningSaldo = $saldoAwal; // Initialize running saldo with initial balance
+            @endphp
+            <tr>
+                <td>{{ $no++ }}</td>
+                <td>-</td>
+                <td>Saldo Awal</td>
+                <td></td>
+                <td></td>
+                <td>@currency($runningSaldo)</td>
+            </tr>
             @foreach ($data as $item)
             <tr>
-                <td>{{ $no++ }} </td>
-                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
+                <td>{{ $no++ }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d/m/Y') }}</td>
                 <td>{{ $item->uraian }}</td>
-                <td>@if ($item instanceof App\Models\Pemasukan) {{ $item->jumlah }} @else 0 @endif</td>
-                <td>@if ($item instanceof App\Models\Pengeluaran) {{ $item->jumlah }} @else 0 @endif</td>
-                @php
-                if ($item instanceof App\Models\Pemasukan) {
-                    $totalPemasukan += $item->jumlah;
-                } else {
-                    $totalPengeluaran += $item->jumlah;
-                }
-                @endphp
+                <td>@if ($item instanceof \App\Models\Pemasukan) @currency($item->jumlah) @php $totalPemasukan += $item->jumlah; @endphp @else @endif</td>
+                <td>@if ($item instanceof \App\Models\Pengeluaran) @currency($item->jumlah) @php $totalPengeluaran += $item->jumlah; @endphp @else @endif</td>
+                @if ($item instanceof \App\Models\Pemasukan)
+                @php $runningSaldo += $item->jumlah; @endphp
+                @else
+                @php $runningSaldo -= $item->jumlah; @endphp
+                @endif
+                <td>@currency($runningSaldo)</td>
             </tr>
             @endforeach
+            <tr class="total-row">
+                <td colspan="3"><strong>Total</strong></td>
+                <td><b>@currency($totalPemasukan)</b></td>
+                <td><b>@currency($totalPengeluaran)</b></td>
+                <td><b>@currency($runningSaldo)</b></td>
+            </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="4" style="text-align: right;">Total Pemasukan</th>
-                <td><strong>@currency($totalPemasukan)</strong></td>
-            </tr>
-            <tr>
-                <th colspan="4" style="text-align: right;">Total Pengeluaran</th>
-                <td><strong>@currency($totalPengeluaran)</strong></td>
-            </tr>
-        </tfoot>
     </table>
 </body>
+
 </html>

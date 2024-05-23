@@ -29,7 +29,7 @@
         <li>
             <a href="/anggaran">
                 <div class="parent-icon"><i class='bx bx-columns'></i></div>
-                <div class="menu-title">Anggaran</div>
+                <div class="menu-title">Data Anggaran</div>
             </a>
         </li>
         @endif
@@ -94,23 +94,23 @@
         @endif
 
         @role('admin|pegawai')
-        <!-- <li>
+        <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-file'></i></div>
                 <div class="menu-title">Laporan</div>
             </a>
             <ul>
-                <li><a href="/laporan"><i class="bx bx-right-arrow-alt"></i>Laporan</a></li>
                 <li><a href="/laporan-pemasukan"><i class="bx bx-right-arrow-alt"></i>Pemasukan</a></li>
                 <li><a href="/laporan-pengeluaran"><i class="bx bx-right-arrow-alt"></i>Pengeluaran</a></li>
+                <li><a href="/laporan"><i class="bx bx-right-arrow-alt"></i>Laporan Keuangan</a></li>
             </ul>
-        </li> -->
-        <li>
+        </li>
+        <!-- <li>
             <a href="/laporan">
                 <div class="parent-icon"><i class='bx bx-file'></i></div>
                 <div class="menu-title">Laporan</div>
             </a>
-        </li>
+        </li> -->
         @endrole
 
         @role('admin')
