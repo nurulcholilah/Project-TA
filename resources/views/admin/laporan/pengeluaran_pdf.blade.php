@@ -9,7 +9,7 @@
     <style>
         @page {
             size: A4 landscape;
-            margin: 20mm;
+            margin: 5mm;
         }
 
         body {

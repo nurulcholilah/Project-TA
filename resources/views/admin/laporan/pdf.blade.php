@@ -7,6 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laporan Keuangan</title>
     <style>
+        @page {
+            size: A4 landscape;
+            margin: 5mm;
+        }
+        
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
