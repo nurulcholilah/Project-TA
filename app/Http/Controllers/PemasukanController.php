@@ -44,10 +44,7 @@ class PemasukanController extends Controller
             'jumlah'    => 'required',
         ]);
 
-        // Ambil tahun dari tanggal pemasukan
         $tahun = date('Y', strtotime($request->tanggal));
-
-        // Cek apakah ada saldo awal untuk tahun yang sesuai
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
             return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');

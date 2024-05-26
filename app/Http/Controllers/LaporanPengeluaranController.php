@@ -38,7 +38,6 @@ class LaporanPengeluaranController extends Controller
         $end_date = $request->input('end_date');
         $year = $request->input('year');
 
-        // Periksa apakah terdapat parameter filter dalam URL
         if ($start_date || $end_date || $year) {
             if ($start_date && $end_date) {
                 $data = Pengeluaran::whereBetween('tanggal', [$start_date, $end_date])->get();
