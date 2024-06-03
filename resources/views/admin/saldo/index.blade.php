@@ -46,7 +46,7 @@
                                 <td>@currency($item->saldo) </td>
                                 <td>{{ $item->keterangan }}</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('saldo.destroy', $item->id_saldo) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('saldo.destroy', $item->id_saldo) }}" method="POST">
                                         <a href="{{ route('saldo.edit', $item->id_saldo) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

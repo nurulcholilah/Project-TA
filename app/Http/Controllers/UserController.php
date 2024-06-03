@@ -8,6 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -56,7 +57,8 @@ class UserController extends Controller
         
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('user.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -114,7 +116,8 @@ class UserController extends Controller
     
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('user.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -126,6 +129,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         DB::table('users')->where('id', $id)->delete();
-        return redirect()->route('user.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('user.index');
     }
 }

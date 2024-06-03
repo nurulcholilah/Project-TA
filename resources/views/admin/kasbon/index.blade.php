@@ -50,7 +50,7 @@
                                     {{ $item->status == 'belum_bayar' ? '-' : (\Carbon\Carbon::parse($item->tanggal_pembayaran)->format('d-m-Y')) }}
                                 </td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('kasbon.destroy', $item->id_kasbon) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('kasbon.destroy', $item->id_kasbon) }}" method="POST">
                                         <a href="{{ route('kasbon.edit', $item->id_kasbon) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

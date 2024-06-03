@@ -53,7 +53,7 @@
                                 <td>@currency($item->jumlah)</td>
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('tagihan.destroy', $item->id_tagihan) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('tagihan.destroy', $item->id_tagihan) }}" method="POST">
                                         <a href="{{ route('tagihan.edit', $item->id_tagihan) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

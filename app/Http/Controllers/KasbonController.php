@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kasbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KasbonController extends Controller
 {
@@ -49,7 +50,8 @@ class KasbonController extends Controller
             'nominal' => $request->nominal,
         ]);
     
-        return redirect()->route('kasbon.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('kasbon.index');
     }
 
     /**
@@ -103,7 +105,8 @@ class KasbonController extends Controller
             'tanggal_pembayaran' => $request->tanggal_pembayaran,
         ]);
 
-        return redirect()->route('kasbon.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('kasbon.index');
     }
 
     /**
@@ -115,6 +118,7 @@ class KasbonController extends Controller
     public function destroy($id)
     {
         DB::table('kasbons')->where('id_kasbon', $id)->delete();
-        return redirect()->route('kasbon.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('kasbon.index');
     }
 }

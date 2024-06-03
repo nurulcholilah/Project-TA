@@ -50,7 +50,7 @@
                                 <td>{{ $user->name }} </td>
                                 <td>{{ $user->email }}</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('user.destroy', $user->id) }}" method="POST">
                                         <a href="{{ route('user.edit', $user->id) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

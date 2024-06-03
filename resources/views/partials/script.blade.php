@@ -87,7 +87,6 @@
      });
  </script>
 
-
  <!-- single select -->
  <script src="assets/plugins/select2/js/select2.min.js"></script>
  <script>
@@ -96,5 +95,29 @@
          width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
          placeholder: $(this).data('placeholder'),
          allowClear: Boolean($(this).data('allow-clear')),
+     });
+ </script>
+
+ <!-- alert untuk delete data -->
+ <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         document.querySelectorAll('.form-delete').forEach(function(form) {
+             form.addEventListener('submit', function(event) {
+                 event.preventDefault();
+                 Swal.fire({
+                     title: 'Apakah Anda Yakin?',
+                     text: "Data ini akan dihapus secara permanen!",
+                     icon: 'warning',
+                     showCancelButton: true,
+                     confirmButtonColor: '#3085d6',
+                     cancelButtonColor: '#d33',
+                     confirmButtonText: 'Ya, Hapus!'
+                 }).then((result) => {
+                     if (result.isConfirmed) {
+                         form.submit();
+                     }
+                 });
+             });
+         });
      });
  </script>

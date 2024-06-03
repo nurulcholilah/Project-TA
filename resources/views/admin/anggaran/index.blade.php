@@ -51,7 +51,7 @@
                                 <td>@currency($item->jumlah)</td>
                                 @if(auth()->user()->hasRole('admin'))
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('anggaran.destroy', $item->id_anggaran) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('anggaran.destroy', $item->id_anggaran) }}" method="POST">
                                         <a href="{{ route('anggaran.edit', $item->id_anggaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

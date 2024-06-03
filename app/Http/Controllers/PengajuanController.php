@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengajuanController extends Controller
 {
@@ -53,7 +54,8 @@ class PengajuanController extends Controller
             'status'        => 'pending',
         ]);
 
-        return redirect()->route('pengajuan.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('pengajuan.index');
     }
 
     /**
@@ -102,7 +104,8 @@ class PengajuanController extends Controller
             'status'        => 'pending',
         ]);
 
-        return redirect()->route('pengajuan.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('pengajuan.index');
     }
 
     /**
@@ -132,6 +135,7 @@ class PengajuanController extends Controller
         $pengajuan->status = 'rejected';
         $pengajuan->save();
 
-        return redirect()->route('pengajuan.index')->with('toast_success', 'Pengajuan ditolak!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('pengajuan.index');
     }
 }

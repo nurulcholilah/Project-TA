@@ -129,7 +129,7 @@
     <!--end switcher-->
     @include("partials.script")
     @include("layouts.theme-control")
-    @include("sweetalert::alert")
+    @include('sweetalert::alert')
 </body>
 
 </html>

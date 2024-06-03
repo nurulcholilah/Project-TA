@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Saldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SaldoController extends Controller
 {
@@ -51,7 +52,8 @@ class SaldoController extends Controller
             'keterangan' => $request->keterangan,
         ]);
 
-        return redirect()->route('saldo.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('saldo.index');
     }
 
     /**
@@ -96,7 +98,8 @@ class SaldoController extends Controller
             'keterangan'    => $request->keterangan,
         ]);
 
-        return redirect()->route('saldo.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('saldo.index');
     }
 
     /**
@@ -108,6 +111,7 @@ class SaldoController extends Controller
     public function destroy($id)
     {
         DB::table('saldos')->where('id_saldo', $id)->delete();
-        return redirect()->route('saldo.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('saldo.index');
     }
 }
