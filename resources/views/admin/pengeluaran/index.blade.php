@@ -44,7 +44,7 @@
                                 <td>{{ $item->kategori ? $item->kategori->keterangan : 'Kategori tidak ditemukan' }}</td>
                                 <td>@currency($item->jumlah)</td>
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
                                         <a href="{{ route('pengeluaran.show', $item->id_pengeluaran) }}" class="btn btn-sm btn-info"><i class="bx bx-show"></i></a>
                                         <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf

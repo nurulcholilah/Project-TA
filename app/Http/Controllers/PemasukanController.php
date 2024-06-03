@@ -6,6 +6,7 @@ use App\Models\Pemasukan;
 use App\Models\Saldo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PemasukanController extends Controller
 {
@@ -59,7 +60,8 @@ class PemasukanController extends Controller
         $saldoAwal->saldo += $request->jumlah;
         $saldoAwal->save();
 
-        return redirect()->route('pemasukan.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('pemasukan.index');
     }
 
     /**
@@ -121,7 +123,8 @@ class PemasukanController extends Controller
         $saldoAwal->saldo += $selisihJumlah;
         $saldoAwal->save();
 
-        return redirect()->route('pemasukan.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('pemasukan.index');
     }
 
     /**
@@ -142,6 +145,7 @@ class PemasukanController extends Controller
         $saldoAwal->save();
         $pemasukan->delete();
 
-        return redirect()->route('pemasukan.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('pemasukan.index');
     }
 }

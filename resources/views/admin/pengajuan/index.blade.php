@@ -82,7 +82,7 @@
                                 @role('pegawai')
                                 <td class="text-center">
                                     @if($item->status == 'pending')
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pengajuan.destroy', $item->id_pengajuan) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('pengajuan.destroy', $item->id_pengajuan) }}" method="POST">
                                         <a href="{{ route('pengajuan.edit', $item->id_pengajuan) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')

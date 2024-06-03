@@ -43,16 +43,14 @@
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }} </td>
                                 <td>{{ $item->uraian }}</td>
                                 <td>@currency($item->jumlah)</td>
-                                <!-- <td>@currency($item->total)</td> -->
                                 <td class="text-center">
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pemasukan.destroy', $item->id_pemasukan) }}" method="POST">
+                                    <form class="form-delete" action="{{ route('pemasukan.destroy', $item->id_pemasukan) }}" method="POST">
                                         <a href="{{ route('pemasukan.edit', $item->id_pemasukan) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>
                                     </form>
                                 </td>
-                            </tr>
                             @endforeach
                         </tbody>
                         <tfoot>

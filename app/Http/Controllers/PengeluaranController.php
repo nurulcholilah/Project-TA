@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\JenisAkun;
 use App\Models\Kategori;
 use App\Models\Pengeluaran;
 use App\Models\Saldo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PengeluaranController extends Controller
 {
@@ -85,7 +84,8 @@ class PengeluaranController extends Controller
             'tdspj'       => $request->tdspj,
         ]);
 
-        return redirect()->route('pengeluaran.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('pengeluaran.index');
     }
 
     /**
@@ -174,7 +174,8 @@ class PengeluaranController extends Controller
         $pengeluaran->tdspj = $request->tdspj;
         $pengeluaran->save();
 
-        return redirect()->route('pengeluaran.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('pengeluaran.index');
     }
 
     /**
@@ -194,6 +195,7 @@ class PengeluaranController extends Controller
         $saldoAwal->saldo += $pengeluaran->jumlah;
         $saldoAwal->save();
         $pengeluaran->delete();
-        return redirect()->route('pengeluaran.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('pengeluaran.index');
     }
 }

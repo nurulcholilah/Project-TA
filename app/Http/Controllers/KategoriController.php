@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class KategoriController extends Controller
 {
@@ -55,7 +56,8 @@ class KategoriController extends Controller
             'jumlah' => $request->jumlah,
         ]);
 
-        return redirect()->route('kategori.index')->with('toast_success', 'Data berhasil disimpan');
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -111,7 +113,8 @@ class KategoriController extends Controller
             'jumlah' => $request->jumlah,
         ]);
 
-        return redirect()->route('kategori.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('kategori.index');
     }
 
     /**
@@ -123,6 +126,7 @@ class KategoriController extends Controller
     public function destroy($id)
     {
         DB::table('kategoris')->where('id_kategori', $id)->delete();
-        return redirect()->route('kategori.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('kategori.index');
     }
 }

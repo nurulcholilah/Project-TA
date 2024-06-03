@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Anggaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AnggaranController extends Controller
 {
@@ -43,15 +44,16 @@ class AnggaranController extends Controller
             'volume'    => 'required',
             'jumlah'    => 'required',
         ]);
-    
+
         Anggaran::create([
             'kode' => $request->kode,
             'kegiatan' => $request->kegiatan,
             'volume' => $request->volume,
             'jumlah' => $request->jumlah,
         ]);
-    
-        return redirect()->route('anggaran.index')->with('toast_success', 'Data berhasil disimpan');
+
+        Alert::success('Data berhasil disimpan');
+        return redirect()->route('anggaran.index');
     }
 
     /**
@@ -103,7 +105,8 @@ class AnggaranController extends Controller
             'jumlah'     => $request->jumlah,
         ]);
 
-        return redirect()->route('anggaran.index')->with('toast_success', 'Data Berhasil Disimpan!');
+        Alert::success('Data berhasil diedit');
+        return redirect()->route('anggaran.index');
     }
 
     /**
@@ -115,6 +118,7 @@ class AnggaranController extends Controller
     public function destroy($id)
     {
         DB::table('anggarans')->where('id_anggaran', $id)->delete();
-        return redirect()->route('anggaran.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('anggaran.index');
     }
 }
