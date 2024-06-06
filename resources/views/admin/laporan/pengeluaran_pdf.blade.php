@@ -98,7 +98,7 @@
                     <th>Tanggal</th>
                     <th>Nota</th>
                     <th>Kode Akun</th>
-                    <th>Kategori</th>
+                    <th>Alokasi Dana</th>
                     <th>Uraian</th>
                     <th>Penerima</th>
                     <th>Jumlah</th>

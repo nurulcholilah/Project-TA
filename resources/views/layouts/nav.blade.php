@@ -47,7 +47,7 @@
         <li>
             <a href="/kategori">
                 <div class="parent-icon"><i class='bx bx-collection'></i></div>
-                <div class="menu-title">Kategori</div>
+                <div class="menu-title">Alokasi Dana</div>
             </a>
         </li>
         @endif

@@ -6,31 +6,36 @@
             <div class="top-menu ms-auto">
                 <ul class="navbar-nav align-items-center">
                     @role('admin')
-                    <!-- <li class="nav-item dropdown dropdown-large">
+                    <li class="nav-item dropdown dropdown-large">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="alert-count">{{ count(Auth::user()->unreadNotifications) }}</span>
+                            <span class="alert-count">{{ auth()->user()->unreadNotifications->count() }}</span>
                             <i class='bx bx-bell'></i>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end">
+                        <div class="dropdown-menu dropdown-menu-end notification-dropdown">
                             <a href="javascript:;">
                                 <div class="msg-header">
-                                    <p class="msg-header-title">Notifications</p>
+                                    <p class="msg-header-title">Notifikasi</p>
                                 </div>
                             </a>
                             <div class="header-notifications-list">
-                                @foreach (Auth::user()->unreadNotifications as $notification)
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="notify bg-light-primary text-primary"><i class="bx bx-group"></i></div>
-                                            <div class="flex-grow-1">
-                                                <h6 class="msg-name">{{ $notification->data['message'] }}
-                                            </div>
+                                @if(auth()->user()->unreadNotifications->isEmpty())
+                                <div class="dropdown-item">
+                                    <p class="msg-name" style="text-align: center;">Tidak ada notifikasi</p>
+                                </div>
+                                @else
+                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                <a class="dropdown-item mark-as-read notification-item" href="javascript:;" data-id="{{ $notification->id }}">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 notification-content">
+                                            <h6 class="msg-name">{{ $notification->data['message'] }}</h6>
                                         </div>
-                                    </a>
+                                    </div>
+                                </a>
                                 @endforeach
+                                @endif
                             </div>
                         </div>
-                    </li> -->
+                    </li>
                     @endrole
                     <li class="nav-item dropdown dropdown-large">
                         <div class="dropdown-menu dropdown-menu-end">

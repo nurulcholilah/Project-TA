@@ -30,7 +30,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Status</th>
-                                <th>Kategori</th>
+                                <th>Alokasi Dana</th>
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')
@@ -76,7 +76,7 @@
                                     @endif
                                 </td>
                                 @endrole
-                                <td>{{ $item->kategori ? $item->kategori->keterangan : 'Kategori tidak ditemukan' }}</td>
+                                <td>{{ $item->kategori ? $item->kategori->keterangan : 'Tidak ditemukan' }}</td>
                                 <td>{{ $item->uraian }}</td>
                                 <td>@currency($item->jumlah_biaya)</td>
                                 @role('pegawai')
@@ -98,7 +98,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Status</th>
-                                <th>Kategori</th>
+                                <th>Alokasi Dana</th>
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')

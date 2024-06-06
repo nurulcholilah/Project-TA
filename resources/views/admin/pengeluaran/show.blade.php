@@ -20,14 +20,38 @@
                     <div class="col-md-6">
                         <h5 class="card-title">Informasi Pengeluaran</h5>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($data->tanggal)->format('d/m/Y') }}</li>
-                            <li class="list-group-item"><strong>Kode Akun:</strong> {{ $data->kode_akun }}</li>
-                            <li class="list-group-item"><strong>Kategori:</strong> {{ $data->kategori ? $data->kategori->keterangan : 'Tidak ditemukan' }}</li>
-                            <li class="list-group-item"><strong>Uraian:</strong> {{ $data->uraian }}</li>
-                            <li class="list-group-item"><strong>Penerima:</strong> {{ $data->penerima }}</li>
-                            <li class="list-group-item"><strong>Jumlah:</strong> @currency($data->jumlah)</li>
-                            <li class="list-group-item"><strong>SPJ:</strong> @currency($data->spj)</li>
-                            <li class="list-group-item"><strong>Tidak SPJ:</strong> @currency($data->tdspj)</li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Tanggal</span>
+                                <span class="list-content">: {{ \Carbon\Carbon::parse($data->tanggal)->format('d/m/Y') }}</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Kode Akun</span>
+                                <span class="list-content">: {{ $data->kode_akun }}</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Alokasi Dana</span>
+                                <span class="list-content">: {{ $data->kategori ? $data->kategori->keterangan : 'Tidak ditemukan' }}</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Uraian</span>
+                                <span class="list-content">: {{ $data->uraian }}</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Penerima</span>
+                                <span class="list-content">: {{ $data->penerima }}</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Jumlah</span>
+                                <span class="list-content">: @currency($data->jumlah)</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">SPJ</span>
+                                <span class="list-content">: @currency($data->spj)</span>
+                            </li>
+                            <li class="list-group-item align-items-start">
+                                <span class="list-label">Tidak SPJ</span>
+                                <span class="list-content">: @currency($data->tdspj)</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-6">

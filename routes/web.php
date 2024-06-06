@@ -59,6 +59,8 @@ Route::middleware(['auth', 'verified',])->group(function () {
 
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index')->middleware(['auth', 'verified', 'role:admin|pegawai']);
     Route::get('/laporan/export-pdf', [LaporanController::class, 'exportPDF'])->name('laporan.exportPDF');
+
+    Route::resource('tagihan', TagihanController::class)->middleware(['auth', 'verified', 'role:admin']);
 });
 
 require __DIR__ . '/auth.php';

@@ -28,7 +28,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Kategori</th>
+                                <th>Alokasi Dana</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -59,7 +59,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Kategori</th>
+                                <th>Alokasi Dana</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kategori_id" class="col-sm-3 col-form-label">Kategori</label>
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Alokasi Dana</label>
                                     <div class="col-sm-9">
                                         <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
                                             <option value="">- Pilih -</option>
