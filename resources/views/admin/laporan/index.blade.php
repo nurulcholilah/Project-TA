@@ -25,7 +25,7 @@
                             <span class="input-group-text bg-transparent"><i class='bx bx-calendar'></i></span>
                             <select class="form-select form-select-sm" id="year" name="year">
                                 <option value="" selected>Pilih Tahun</option>
-                                @for ($i = date('Y') + 2; $i >= 2020; $i--)
+                                @for ($i = date('Y') + 1; $i >= 2020; $i--)
                                 <option value="{{ $i }}" @if(request()->input('year') == $i) selected @endif>{{ $i }}</option>
                                 @endfor
                             </select>

@@ -31,8 +31,8 @@
  <link rel="stylesheet" href="{{ url('assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.min.css')}}">
  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
+ <!-- tampilan tabel -->
  <style>
-     /* merapikan tabel agar tidak scroll panjang ke samping */
      .dataTables_wrapper {
          position: relative;
      }
@@ -56,7 +56,6 @@
          overflow: hidden;
          text-overflow: ellipsis;
          max-width: 150px;
-         /* Sesuaikan lebar maksimum sesuai kebutuhan */
      }
 
      .table td:hover {
@@ -65,3 +64,46 @@
          word-wrap: break-word;
      }
  </style>
+
+<!-- tampilan notifikasi -->
+<style>
+     .notification-dropdown {
+         max-height: 400px;
+         overflow-y: auto;
+     }
+
+     .header-notifications-list {
+         max-height: 50px;
+         overflow-y: auto;
+     }
+
+     .notification-item {
+         max-width: 400px;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+     }
+
+     .notification-item h6,
+     .notification-item p {
+         margin: 0;
+     }
+ </style>
+
+<!-- list di show pengeluaran -->
+<style>
+    .list-group-item {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1.25rem;
+    }
+
+    .list-label {
+        flex: 0 0 150px;
+        font-weight: bold;
+    }
+
+    .list-content {
+        flex: 1;
+    }
+</style>
