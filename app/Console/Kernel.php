@@ -23,13 +23,17 @@ class Kernel extends ConsoleKernel
             ->timezone('Asia/Jakarta')
             ->when(function () {
                 $now = now()->timezone('Asia/Jakarta');
-                return $now->day >= 8 && $now->day <= 10 && $now->hour >= 8 && $now->hour <= 17;
+                return ($now->day == 8 || $now->day == 10) && $now->hour >= 8 && $now->hour < 17;
             })
             ->hourly();
 
         $schedule->command('notifications:cleanup')
             ->timezone('Asia/Jakarta')
-            ->monthlyOn(11, '00:05');
+            ->when(function () {
+                $now = now()->timezone('Asia/Jakarta');
+                return ($now->day == 9 || $now->day == 11) && $now->hour == 0;
+            })
+            ->hourly();
     }
 
     /**
