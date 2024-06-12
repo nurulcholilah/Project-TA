@@ -77,7 +77,8 @@ class AnggaranController extends Controller
     {
         $data = Anggaran::where('id_anggaran', $id)->first();
         if (!$data) {
-            return redirect()->route('anggaran.index')->with('error', 'Data tidak ditemukan');
+            Alert::error('Data tidak ditemukan');
+            return redirect()->route('anggaran.index');
         }
         return view('admin.anggaran.edit', compact('data'));
     }

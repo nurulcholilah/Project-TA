@@ -66,7 +66,8 @@ class PengeluaranController extends Controller
         $tahun = date('Y', strtotime($request->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->route('pengeluaran.index');
         }
 
         $saldoAwal->saldo -= $request->jumlah;
@@ -144,7 +145,8 @@ class PengeluaranController extends Controller
         $tahun = date('Y', strtotime($request->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->route('pengeluaran.index');
         }
 
         $saldoAwal->saldo -= $selisihJumlah;
@@ -190,7 +192,8 @@ class PengeluaranController extends Controller
         $tahun = date('Y', strtotime($pengeluaran->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pengeluaran.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->route('pengeluaran.index');
         }
         $saldoAwal->saldo += $pengeluaran->jumlah;
         $saldoAwal->save();

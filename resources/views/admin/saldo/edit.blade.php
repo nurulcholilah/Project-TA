@@ -23,6 +23,7 @@
                         <form action="{{ route('saldo.update', $data->id_saldo) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
+                            <a href="{{ route('saldo.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
                                     <h5 class="mb-0">Edit saldo</h5>

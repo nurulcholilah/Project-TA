@@ -22,6 +22,7 @@
                     <div class="card-body">
                         <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <a href="{{ route('kategori.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
                                     <h5 class="mb-0">Tambah Data Kategori</h5>
@@ -39,7 +40,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="keterangan" class="col-sm-3 col-form-label">Keterangan</label>
+                                    <label for="keterangan" class="col-sm-3 col-form-label">Seksi</label>
                                     <div class="col-sm-9">
                                         <textarea class="form-control @error('keterangan') is-invalid @enderror" rows="3" cols="20" name="keterangan" id="keterangan" placeholder="Masukkan keterangan">{{ old('keterangan') }}</textarea>
                                         @error('keterangan')

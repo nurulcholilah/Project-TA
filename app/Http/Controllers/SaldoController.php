@@ -77,7 +77,8 @@ class SaldoController extends Controller
     {
         $data = Saldo::where('id_saldo', $id)->first();
         if (!$data) {
-            return redirect()->route('saldo.index')->with('error', 'Data tidak ditemukan');
+            Alert::error('Data tidak ditemukan');
+            return redirect()->route('saldo.index');
         }
         return view('admin.saldo.edit', compact('data'));
     }

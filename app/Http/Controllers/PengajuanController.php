@@ -117,7 +117,8 @@ class PengajuanController extends Controller
     public function destroy($id)
     {
         DB::table('pengajuans')->where('id_pengajuan', $id)->delete();
-        return redirect()->route('pengajuan.index')->with('info', 'Data Berhasil Dihapus!');
+        Alert::success('Data berhasil dihapus');
+        return redirect()->route('pengajuan.index');
     }
 
     public function approve(Request $request, $id)
@@ -125,8 +126,8 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::findOrFail($id);
         $pengajuan->status = 'approved';
         $pengajuan->save();
-
-        return redirect()->route('pengajuan.index')->with('toast_success', 'Pengajuan disetujui!');
+        Alert::success('Pengajuan disetujui!');
+        return redirect()->route('pengajuan.index');
     }
 
     public function reject(Request $request, $id)

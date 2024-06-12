@@ -43,7 +43,7 @@
                                 <td>
                                     @if(!empty($user->getRoleNames()))
                                     @foreach($user->getRoleNames() as $r)
-                                    <label class="bg-primary text-white rounded-pill px-2 py-1">{{ $r }}</label>
+                                    <label class="text-white rounded-pill px-2 py-1" style="background-color: #7E8EF1; border-color: #7E8EF1;">{{ $r }}</label>
                                     @endforeach
                                     @endif
                                 </td>

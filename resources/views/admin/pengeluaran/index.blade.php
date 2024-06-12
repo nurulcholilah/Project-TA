@@ -28,7 +28,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Alokasi Dana</th>
+                                <th>Seksi</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>
@@ -45,7 +45,7 @@
                                 <td>@currency($item->jumlah)</td>
                                 <td class="text-center">
                                     <form class="form-delete" action="{{ route('pengeluaran.destroy', $item->id_pengeluaran) }}" method="POST">
-                                        <a href="{{ route('pengeluaran.show', $item->id_pengeluaran) }}" class="btn btn-sm btn-info"><i class="bx bx-show"></i></a>
+                                        <a href="{{ route('pengeluaran.show', $item->id_pengeluaran) }}" class="btn btn-sm" style="background-color: #7E8EF1; border-color: #7E8EF1;"><i class="bx bx-show" style="color: white;"></i></a>
                                         <a href="{{ route('pengeluaran.edit', $item->id_pengeluaran) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
@@ -59,7 +59,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Tanggal</th>
-                                <th>Alokasi Dana</th>
+                                <th>Seksi</th>
                                 <th>Jumlah</th>
                                 <th>Aksi</th>
                             </tr>

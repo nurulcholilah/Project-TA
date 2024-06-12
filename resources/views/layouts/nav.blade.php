@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img src="{{url('assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
+            <img src="{{url('assets/images/logo-bpn.ico')}}" class="logo-icon" alt="logo icon" style="width: 75px; height:auto">
         </div>
         <div>
             <h4 class="logo-text">Admifin</h4>

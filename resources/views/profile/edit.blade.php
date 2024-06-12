@@ -4,13 +4,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">User Profile</div>
+            <div class="breadcrumb-title pe-3">User</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href=""><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit Profil</li>
                     </ol>
                 </nav>
             </div>
@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <!-- Your profile image and details here -->
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="{{ url('assets/images/avatars/avatar-2.png')}}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                        <img src="{{ url('assets/images/user.png')}}" alt="Admin" class="rounded-circle p-1" width="110">
                                         <div class="mt-3">
                                             <h4>{{ Auth::user()->name }}</h4>
                                         </div>
