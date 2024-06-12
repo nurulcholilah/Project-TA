@@ -47,6 +47,7 @@ class KategoriController extends Controller
         $saldo_awal = DB::table('saldos')->latest('tanggal')->value('saldo_awal');
         $totalKategori = DB::table('kategoris')->sum('jumlah');
         if ($totalKategori + $request->jumlah > $saldo_awal) {
+            Alert::error('Jumlah dana melebihi saldo');
             return redirect()->back()->withInput();
         }
 
@@ -81,7 +82,8 @@ class KategoriController extends Controller
     {
         $data = Kategori::where('id_kategori', $id)->first();
         if (!$data) {
-            return redirect()->route('kategori.index')->with('error', 'Data tidak ditemukan');
+            Alert::error('Data tidak ditemukan');
+            return redirect()->route('kategori.index');
         }
         return view('admin.kategori.edit', compact('data'));
     }
@@ -104,6 +106,7 @@ class KategoriController extends Controller
         $saldo_awal = DB::table('saldos')->latest('tanggal')->value('saldo_awal');
         $totalKategori = DB::table('kategoris')->where('id_kategori', '!=', $id)->sum('jumlah');
         if ($totalKategori + $request->jumlah > $saldo_awal) {
+            Alert::error('Jumlah dana melebihi saldo');
             return redirect()->back()->withInput();
         }
 

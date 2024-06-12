@@ -30,7 +30,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Status</th>
-                                <th>Alokasi Dana</th>
+                                <th>Seksi</th>
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')
@@ -98,7 +98,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Status</th>
-                                <th>Alokasi Dana</th>
+                                <th>Seksi</th>
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')

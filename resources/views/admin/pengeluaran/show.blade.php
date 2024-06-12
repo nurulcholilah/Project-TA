@@ -29,7 +29,7 @@
                                 <span class="list-content">: {{ $data->kode_akun }}</span>
                             </li>
                             <li class="list-group-item align-items-start">
-                                <span class="list-label">Alokasi Dana</span>
+                                <span class="list-label">Seksi</span>
                                 <span class="list-content">: {{ $data->kategori ? $data->kategori->keterangan : 'Tidak ditemukan' }}</span>
                             </li>
                             <li class="list-group-item align-items-start">

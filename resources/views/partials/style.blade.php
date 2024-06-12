@@ -1,6 +1,6 @@
  <link href="{{ url('assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet" />
  <!--favicon-->
- <link rel="icon" href="{{ url('assets/images/favicon-32x32.png') }}" type="image/png" />
+ <link rel="icon" href="{{ url('assets/images/logo-bpn1.png') }}" type="image/png" />
  <!--plugins-->
  <link href="{{ url('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
  <link href="{{ url('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />

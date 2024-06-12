@@ -22,6 +22,7 @@
                     <div class="card-body">
                         <form action="{{ route('pemasukan.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <a href="{{ route('pemasukan.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
                                     <h5 class="mb-0">Tambah Data Pemasukan</h5>

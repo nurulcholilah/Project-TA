@@ -22,13 +22,14 @@
                     <div class="card-body">
                         <form action="{{ route('pengajuan.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <a href="{{ route('pengajuan.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
                                     <h5 class="mb-0">Tambah Data Pengajuan</h5>
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
-                                    <label for="kategori_id" class="col-sm-3 col-form-label">Alokasi Dana</label>
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Seksi</label>
                                     <div class="col-sm-9">
                                         <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
                                             <option value="">- Pilih -</option>

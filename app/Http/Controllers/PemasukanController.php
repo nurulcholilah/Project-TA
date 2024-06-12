@@ -48,7 +48,8 @@ class PemasukanController extends Controller
         $tahun = date('Y', strtotime($request->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->back()->withInput();
         }
 
         Pemasukan::create([
@@ -85,7 +86,8 @@ class PemasukanController extends Controller
     {
         $data = Pemasukan::where('id_pemasukan', $id)->first();
         if (!$data) {
-            return redirect()->route('pemasukan.index')->with('error', 'Data tidak ditemukan');
+            Alert::error('Data tidak ditemukan');
+            return redirect()->route('pemasukan.index');
         }
         return view('admin.pemasukan.edit', compact('data'));
     }
@@ -111,7 +113,8 @@ class PemasukanController extends Controller
         $tahun = date('Y', strtotime($request->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->back()->withInput();
         }
 
         $pemasukan->update([
@@ -139,7 +142,8 @@ class PemasukanController extends Controller
         $tahun = date('Y', strtotime($pemasukan->tanggal));
         $saldoAwal = Saldo::whereYear('tanggal', $tahun)->first();
         if (!$saldoAwal) {
-            return redirect()->route('pemasukan.index')->with('error', 'Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            Alert::error('Saldo untuk tahun ' . $tahun . ' belum dibuat.');
+            return redirect()->back()->withInput();
         }
         $saldoAwal->saldo -= $pemasukan->jumlah;
         $saldoAwal->save();

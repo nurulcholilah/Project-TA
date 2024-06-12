@@ -23,6 +23,7 @@
                         <form action="{{ route('pengeluaran.update', $data->id_pengeluaran) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PATCH')
+                            <a href="{{ route('pengeluaran.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
                                     <h5 class="mb-0">Edit Data Pengeluaran</h5>
@@ -63,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="kategori_id" class="col-sm-3 col-form-label">Alokasi Dana</label>
+                                    <label for="kategori_id" class="col-sm-3 col-form-label">Seksi</label>
                                     <div class="col-sm-9">
                                         <select name="kategori_id" id="kategori_id" class="form-control @error('kategori_id') is-invalid @enderror">
                                             <option value="">- Pilih -</option>

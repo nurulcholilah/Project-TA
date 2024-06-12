@@ -75,7 +75,8 @@ class KasbonController extends Controller
     {
         $data = Kasbon::where('id_kasbon', $id)->first();
         if (!$data) {
-            return redirect()->route('kasbon.index')->with('error', 'Data tidak ditemukan');
+            Alert::error('Data tidak ditemukan');
+            return redirect()->route('kasbon.index');
         }
         return view('admin.kasbon.edit', compact('data'));
     }
