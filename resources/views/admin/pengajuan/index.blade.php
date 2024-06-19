@@ -34,7 +34,7 @@
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')
-                                <th>Aksi</th>
+                                <!-- <th>Aksi</th> -->
                                 @endrole
                             </tr>
                         </thead>
@@ -80,16 +80,16 @@
                                 <td>{{ $item->uraian }}</td>
                                 <td>@currency($item->jumlah_biaya)</td>
                                 @role('pegawai')
-                                <td class="text-center">
+                                <!-- <td class="text-center"> -->
                                     @if($item->status == 'pending')
-                                    <form class="form-delete" action="{{ route('pengajuan.destroy', $item->id_pengajuan) }}" method="POST">
+                                    <!-- <form class="form-delete" action="{{ route('pengajuan.destroy', $item->id_pengajuan) }}" method="POST">
                                         <a href="{{ route('pengajuan.edit', $item->id_pengajuan) }}" class="btn btn-sm btn-primary"><i class="bx bxs-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="bx bxs-trash"></i></button>
-                                    </form>
+                                    </form> -->
                                     @endif
-                                </td>
+                                <!-- </td> -->
                                 @endrole
                             </tr>
                             @endforeach
@@ -102,7 +102,7 @@
                                 <th>Uraian</th>
                                 <th>Jumlah</th>
                                 @role('pegawai')
-                                <th>Aksi</th>
+                                <!-- <th>Aksi</th> -->
                                 @endrole
                             </tr>
                         </tfoot>
