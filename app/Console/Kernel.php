@@ -16,8 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->command('remind:admin-due-date')->timezone('Asia/Jakarta')->at('22:35');
-        // $schedule->command('notifications:cleanup')->timezone('Asia/Jakarta')->at('23:00');
+        // $schedule->command('remind:admin-due-date')->timezone('Asia/Jakarta')->at('15:26');
+        // $schedule->command('notifications:cleanup')->timezone('Asia/Jakarta')->at('15:30');
 
         $schedule->command('remind:admin-due-date')
             ->timezone('Asia/Jakarta')

@@ -10,7 +10,7 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Form Edit Kategori</li>
+                        <li class="breadcrumb-item active" aria-current="page">Form Edit Alokasi Dana</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
                             <a href="{{ route('kategori.index') }}" class="btn btn-sm"><i class="bx bx-arrow-back"></i>Kembali</a><br><br>
                             <div class="border p-4 rounded">
                                 <div class="card-title d-flex align-items-center">
-                                    <h5 class="mb-0">Edit Data Kategori</h5>
+                                    <h5 class="mb-0">Edit Data Alokasi Dana</h5>
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
