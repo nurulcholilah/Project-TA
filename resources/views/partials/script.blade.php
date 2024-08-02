@@ -19,6 +19,12 @@
  <script src="{{ url('assets/plugins/datetimepicker/js/picker.date.js')}}"></script>
  <script src="{{ url('assets/plugins/bootstrap-material-datetimepicker/js/moment.min.js')}}"></script>
  <script src="{{ url('assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.min.js')}}"></script>
+ <!-- Chart -->
+ <script>
+     new PerfectScrollbar('.dashboard-top-countries');
+ </script>
+ <script src="assets/js/index.js"></script>
+
  <script>
      $('.datepicker').pickadate({
              selectMonths: true,
