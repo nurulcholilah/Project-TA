@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pemasukan;
 use App\Models\Pengeluaran;
 use App\Models\Saldo;
+use App\Models\Kategori;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,12 @@ class DashboardController extends Controller
 
         $pengeluaranTahunIni = Pengeluaran::whereYear('tanggal', $currentYear)->sum('jumlah') ?? 0;
 
+        $pengeluaranPerKategori = Pengeluaran::selectRaw('kategori_id, SUM(jumlah) as total')
+            ->whereYear('tanggal', $currentYear)
+            ->groupBy('kategori_id')
+            ->with('kategori')
+            ->get();
+
         return view('dashboard', [
             'saldoAwal' => $saldoAwal,
             'saldoSaatIni' => $saldoSaatIni,
@@ -46,7 +53,8 @@ class DashboardController extends Controller
             'pemasukanBulanIni' => $pemasukanBulanIni,
             'pengeluaranBulanIni' => $pengeluaranBulanIni,
             'pemasukanTahunIni' => $pemasukanTahunIni,
-            'pengeluaranTahunIni' => $pengeluaranTahunIni
+            'pengeluaranTahunIni' => $pengeluaranTahunIni,
+            'pengeluaranPerKategori' => $pengeluaranPerKategori
         ]);
     }
 }
